@@ -67,7 +67,7 @@
     "react-github-button": "~0.1.11",
     "react-hot-loader": "~4.13.0",
     "react-scripts": "4.0.1",
-    "react-select": "~1.1.0",
+    "react-select": "~5.2.1",
     "react-test-renderer": "~16.14.0",
     "sass": "~1.47.0",
     "sass-loader": "~10.1.1",
