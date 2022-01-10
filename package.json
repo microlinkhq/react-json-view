@@ -43,7 +43,7 @@
     "react-textarea-autosize": "~8.3.2"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "~7.12.1",
+    "@babel/eslint-parser": "~7.16.5",
     "@babel/plugin-syntax-class-properties": "~7.12.1",
     "@babel/plugin-syntax-jsx": "~7.12.1",
     "@babel/register": "7.12.10",
