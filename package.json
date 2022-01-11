@@ -48,7 +48,7 @@
     "@babel/plugin-syntax-class-properties": "~7.12.1",
     "@babel/plugin-syntax-jsx": "~7.12.1",
     "@babel/register": "7.12.10",
-    "babel-plugin-react-html-attrs": "~2.1.0",
+    "babel-plugin-react-html-attrs": "~3.0.5",
     "chai": "~4.2.0",
     "css-loader": "~4.3.0",
     "enzyme": "~3.2.0",
