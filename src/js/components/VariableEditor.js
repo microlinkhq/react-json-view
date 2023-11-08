@@ -21,7 +21,7 @@ import {
 } from './DataTypes/DataTypes';
 
 //clibboard icon
-import { CheckCircle, Edit, RemoveCircle as Remove } from './icons';
+import { CheckCircle, CustomIcon, Edit, RemoveCircle as Remove } from './icons';
 
 //theme
 import Theme from './../themes/getStyle';
@@ -229,7 +229,7 @@ class VariableEditor extends React.PureComponent {
           display: this.state.hovered ? 'inline-block' : 'none'
         } }
       >
-        <Remove
+        <CustomIcon
           class="click-to-custom-icon"
           { ...Theme(theme, 'customEventIcon') }
           onClick={ () => {

@@ -5,7 +5,7 @@ import { toType } from './../helpers/util';
 import CopyToClipboard from './CopyToClipboard';
 
 //icons
-import { AddCircle as Add, RemoveCircle as Remove } from './icons';
+import { AddCircle as Add, CustomIcon, RemoveCircle as Remove } from './icons';
 
 //theme
 import Theme from './../themes/getStyle';
@@ -120,9 +120,9 @@ export default class extends React.PureComponent {
           display: rowHovered ? 'inline-block' : 'none'
         } }
       >
-        <Remove
+        <CustomIcon
           class="click-to-custom-icon"
-          { ...Theme(theme, 'removeVarIcon') }
+          { ...Theme(theme, 'customEventIcon') }
           onClick={ () => {
             console.debug('CUSTOM_EVENT')
             dispatcher.dispatch({
