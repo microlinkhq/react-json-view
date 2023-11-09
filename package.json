@@ -2,7 +2,7 @@
   "name": "@rafaelsilva81/react-json-view",
   "description": "Interactive react component for displaying javascript arrays and JSON objects.",
   "homepage": "https://github.com/rafaelsilva81/react-json-view",
-  "version": "1.24.0",
+  "version": "1.24.1",
   "main": "dist/main.js",
   "author": {
     "name": "Mac Gainor"
