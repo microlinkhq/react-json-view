@@ -132,6 +132,7 @@ export default class extends React.PureComponent {
                 name: name,
                 type: typeof src,
                 value: src,
+                namespace: namespace
               }
             });
           } }
