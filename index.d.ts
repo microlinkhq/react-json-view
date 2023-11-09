@@ -261,7 +261,7 @@ export interface OnCustomProps {
   /**
    * The value of the currently selected entry.
    */
-  existing_value: object | string | number | boolean | null;
+  value: object | string | number | boolean | null;
   /**
    * The type of the value. For "number" type, it will be replaced with the more
    * accurate types: "float", "integer", or "nan".

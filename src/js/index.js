@@ -261,18 +261,17 @@ class ReactJsonView extends React.PureComponent {
   customEventAction = () => {
     const {
       name,
-      namespace,
-      existing_value,
-      type
+      type,
+      value,
+      namespace
     } = ObjectAttributes.get(this.rjvId, 'action', 'custom-event');
 
     const { onCustomEvent } = this.props;
     // call the onCustomEvent callback with the payload
     onCustomEvent({
       name: name,
-      namespace: namespace,
-      existing_value: existing_value,
-      type: type
+      type: type,
+      value: value,
     });
   }
 

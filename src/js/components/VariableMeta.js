@@ -124,18 +124,14 @@ export default class extends React.PureComponent {
           class="click-to-custom-icon"
           { ...Theme(theme, 'customEventIcon') }
           onClick={ () => {
-            console.debug('CUSTOM_EVENT')
+            console.log(this.props);
             dispatcher.dispatch({
               name: 'CUSTOM_EVENT',
               rjvId: rjvId,
               data: {
                 name: name,
-                namespace: namespace.splice(
-                  0,
-                  namespace.length - 1
-                ),
-                existing_value: src,
-                variable_removed: true
+                type: typeof src,
+                value: src,
               }
             });
           } }

@@ -220,7 +220,7 @@ class VariableEditor extends React.PureComponent {
 
   getCustomEventIcon = () => {
     const { variable, namespace, theme, rjvId } = this.props;
-
+    let location = [...namespace];
     return (
       <div
         class="click-to-custom"
@@ -233,15 +233,12 @@ class VariableEditor extends React.PureComponent {
           class="click-to-custom-icon"
           { ...Theme(theme, 'customEventIcon') }
           onClick={ () => {
-            console.debug('CUSTOM_EVENT')
             dispatcher.dispatch({
               name: 'CUSTOM_EVENT',
               rjvId: rjvId,
               data: {
-                name: variable.name,
-                namespace: namespace,
-                existing_value: variable.value,
-                variable_removed: false
+                ...variable,
+                namespace: location
               }
             });
           } }
