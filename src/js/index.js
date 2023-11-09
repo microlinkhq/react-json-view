@@ -272,6 +272,7 @@ class ReactJsonView extends React.PureComponent {
       name: name,
       type: type,
       value: value,
+      namespace: namespace
     });
   }
 
