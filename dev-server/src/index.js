@@ -13,30 +13,30 @@ ReactDom.render(
   <div>
     {/* just pass in your JSON to the src attribute */ }
     <JsonViewer
-      sortKeys
-      style={ { padding: '30px', backgroundColor: 'white' } }
+      enableClipboard={ false }
+      displayObjectSize={ false }
       name={ null }
       src={ getExampleJson1() }
       quotesOnKeys={ false }
       theme={ {
-        base00: '#fff',
-        base01: '#f9f9f9',
-        base02: '#f9f9f9',
+        base00: '#fff', // bacgroundColor 
+        base01: '#fff',  // bgs and labels
+        base02: '#fff',
         base03: '#282828',
         base04: '#04646C',
         base05: '#282828',
         base06: '#282828',
         base07: '#282828',
         base08: '#282828',
-        base09: '#03BCCC',
-        base0A: '#03BCCC',
-        base0B: '#03BCCC',
-        base0C: '#03BCCC',
-        base0D: '#03BCCC',
+        base09: '#F85C60',
+        base0A: '#0CB66E',
+        base0B: '#603D98',
+        base0C: '#FFD22D',
+        base0D: '#186ADE',
         base0E: '#03BCCC',
         base0F: '#03BCCC'
       } }
-      collapseStringsAfterLength={ 12 }
+
       onEdit={ e => {
         console.log('edit callback', e);
         if (e.new_value == 'error') {
@@ -59,19 +59,8 @@ ReactDom.render(
         console.log('select callback', e);
         console.log(e.namespace);
       } }
-      displayObjectSize={ true }
-      enableClipboard={ copy => {
-        console.log('you copied to clipboard!', copy);
-      } }
-      shouldCollapse={ ({ src, namespace, type }) => {
-        if (type === 'array' && src.indexOf('test') > -1) {
-          return true;
-        } else if (namespace.indexOf('moment') > -1) {
-          return true;
-        }
-        return false;
-      } }
-      defaultValue=""
+
+
 
     />
 
