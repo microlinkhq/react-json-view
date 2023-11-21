@@ -13,7 +13,7 @@ ReactDom.render(
   <div>
     {/* just pass in your JSON to the src attribute */ }
     <JsonViewer
-      enableClipboard={ false }
+
       displayObjectSize={ false }
       name={ null }
       src={ getExampleJson1() }
