@@ -37,7 +37,12 @@ export default class extends React.PureComponent {
 
         document.body.appendChild(container);
         container.select();
-        document.execCommand('copy');
+        
+        if (navigator.clipboard && navigator.clipboard.writeText && typeof navigator.clipboard.writeText === "function") {
+            navigator.clipboard.writeText(container.value);
+        } else {
+            document.execCommand("copy");
+        }
 
         document.body.removeChild(container);
 
