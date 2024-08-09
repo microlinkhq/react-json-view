@@ -1,13 +1,14 @@
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/rjv-icon-alt.png?raw=true)
+![alt text](https://raw.githubusercontent.com/microlinkhq/react-json-view/master/doc/rjv-icon-alt.png)
 
-[![npm](https://img.shields.io/npm/v/react-json-view.svg)](https://www.npmjs.com/package/react-json-view) [![npm](https://img.shields.io/npm/l/react-json-view.svg)](https://github.com/mac-s-g/react-json-view/blob/master/LISCENSE) [![Build Status](https://travis-ci.org/mac-s-g/react-json-view.svg)](https://travis-ci.org/mac-s-g/react-json-view) [![Coverage Status](https://coveralls.io/repos/github/mac-s-g/react-json-view/badge.svg?branch=master)](https://coveralls.io/github/mac-s-g/react-json-view?branch=master)
+[![npm](https://img.shields.io/npm/v/%40microlink%2Freact-json-view.svg)](https://www.npmjs.com/package/@microlink/react-json-view) [![npm](https://img.shields.io/npm/l/%40microlink%2Freact-json-view.svg
+)](https://github.com/microlinkhq/react-json-view/blob/master/LICENSE) [![Build Status](https://github.com/microlinkhq/react-json-view/workflows/test/badge.svg)](https://github.com/microlinkhq/react-json-view/actions/workflows/main.yml?query=branch%3Amaster)
 
 # react-json-view
 RJV is a React component for displaying and editing javascript **arrays** and **JSON objects**.
 
 This component provides a responsive interface for displaying arrays or JSON in a web browser.  NPM offers a distribution of the source that's transpiled to ES5; so you can include this component with *any web-based javascript application*.
 
-[Check out the Interactive Demo](https://mac-s-g.github.io/react-json-view/demo/dist/)
+[Check out the Interactive Demo](https://react-json-view.microlink.io/)
 
 
 ### Implementation Example
@@ -21,9 +22,9 @@ import ReactJson from '@microlink/react-json-view'
 
 ### Output Examples
 #### Default Theme
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-15.png?raw=true "Output Example 1")
+![alt text](https://raw.githubusercontent.com/microlinkhq/react-json-view/master/doc/output-example-15.png "Output Example 1")
 #### Hopscotch Theme, with Triangle Icons:
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-14.png?raw=true "Output Example 2")
+![alt text](https://raw.githubusercontent.com/microlinkhq/react-json-view/master/doc/output-example-14.png "Output Example 2")
 
 ### Installation Instructions
 Install this component with [NPM](https://www.npmjs.com/package/@microlink/react-json-view).
@@ -42,7 +43,7 @@ Name|Type|Default|Description
 |:---|:---|:---|:---
 `src`|`JSON Object`|None|This property contains your input JSON
 `name`|`string`|`JSX.Element` or `false`|"root"|Contains the name of your root node.  Use `null` or `false` for no name.
-`theme`|`string`|"rjv-default"|RJV supports base-16 themes.  Check out the list of supported themes [in the demo](https://mac-s-g.github.io/react-json-view/demo/dist/). A custom "rjv-default" theme applies by default.
+`theme`|`string`|"rjv-default"|RJV supports base-16 themes.  Check out the list of supported themes [in the demo](https://react-json-view.microlink.io/). A custom "rjv-default" theme applies by default.
 `style`|`object`|`{}`|Style attributes for react-json-view container.  Explicit style attributes will override attributes provided by a theme.
 `iconStyle`|`string`|"circle"| Style of expand/collapse icons.  Accepted values are "circle", triangle" or "square".
 `indentWidth`|`integer`|4|Set the indent-width for nested objects
@@ -83,18 +84,18 @@ You can specify a `theme` name or object when you instantiate your rjv component
 ```jsx
 <ReactJson src={my_important_json} theme="monokai" />
 ```
-Check out the list of supported themes [in the component demo](https://mac-s-g.github.io/react-json-view/demo/dist/).
+Check out the list of supported themes [in the component demo](https://react-json-view.microlink.io/).
 
 #### Monokai theme example
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-monokai-2.png?raw=true "Base-16 Theme Example")
+![alt text](https://raw.githubusercontent.com/microlinkhq/react-json-view/master/doc/output-example-monokai-2.png "Base-16 Theme Example")
 
 #### Solarized theme example
-![alt text](https://github.com/mac-s-g/react-json-view/blob/master/doc/output-example-solarized-2.png?raw=true "Base-16 Theme Example")
+![alt text](https://raw.githubusercontent.com/microlinkhq/react-json-view/master/doc/output-example-solarized-2.png "Base-16 Theme Example")
 
 #### Use Your Own Theme
 You can supply your own base-16 theme object.
 
-To better understand custom themes, take a look at [my example implementation](https://github.com/mac-s-g/react-json-view/blob/7c154b9a7d83ea89dce2c171ebdf4d163ff49233/dev-server/src/index.js#L135) and the [base-16 theme styling guidelines](https://github.com/chriskempson/base16/blob/master/styling.md).
+To better understand custom themes, take a look at [my example implementation](https://github.com/microlinkhq/react-json-view/blob/7c154b9a7d83ea89dce2c171ebdf4d163ff49233/dev-server/src/index.js#L135) and the [base-16 theme styling guidelines](https://github.com/chriskempson/base16/blob/master/styling.md).
 
 ### onEdit, onAdd and onDelete Interaction
 Pass callback methods to `onEdit`, `onAdd` and `onDelete` props.  Your method will be invoked when a user attempts to update your `src` object.
@@ -117,7 +118,7 @@ Returning `false` from a callback method will prevent the src from being affecte
 
 ```bash
 # clone this repository
-git clone git@github.com:mac-s-g/react-json-view.git && cd react-json-view
+git clone git@github.com:microlinkhq/react-json-view.git && cd react-json-view
 # install dependencies
 npm install --save-dev
 # run the dev server with hot reloading
@@ -139,7 +140,7 @@ You can run the test suite with `npm run test` or `npm run test:watch` to automa
 
 I recommend using docker for development because it enforces environmental consistency.
 
-For information about contributing with Docker, see the [README in ./docker](https://github.com/mac-s-g/react-json-view/blob/master/docker/README.md#contributing-to-this-project-using-docker).
+For information about contributing with Docker, see the [README in ./docker](https://github.com/microlinkhq/react-json-view/blob/master/docker/README.md#contributing-to-this-project-using-docker).
 
 
 ### Inspiration

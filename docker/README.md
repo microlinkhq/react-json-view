@@ -59,20 +59,20 @@ for example, the container used with this project has the following composition:
 
 the `Dockerfile` defines exactly how a container should be composed for an application.  Any docker-integrated workflow starts here.
 
-Here is the [RJV Dockerfile](https://github.com/mac-s-g/react-json-view/blob/master/Dockerfile)
+Here is the [RJV Dockerfile](https://github.com/microlinkhq/react-json-view/blob/master/Dockerfile)
 
-Notice [here](https://github.com/mac-s-g/react-json-view/blob/master/Dockerfile#L1) that my container is built on top of a node container.  If you track down that node container on docker-hub, you'll see that it's built on top of a debian container.  Also notice that `node_modules` are installed directly into my container [here](https://github.com/mac-s-g/react-json-view/blob/master/Dockerfile#L6-L7).
+Notice [here](https://github.com/microlinkhq/react-json-view/blob/master/Dockerfile#L1) that my container is built on top of a node container.  If you track down that node container on docker-hub, you'll see that it's built on top of a debian container.  Also notice that `node_modules` are installed directly into my container [here](https://github.com/microlinkhq/react-json-view/blob/master/Dockerfile#L6-L7).
 
 When I run `./docker/build-container.sh`, docker produces a container including all the `node_modules` listed in my `package.json` file.
 
 When I run `./docker/dev-server.sh`, a few things happen:
- 1. docker [runs my container and mounts some source files](https://github.com/mac-s-g/react-json-view/blob/master/docker/dev-server.sh#L16-L20) into the container
+ 1. docker [runs my container and mounts some source files](https://github.com/microlinkhq/react-json-view/blob/master/docker/dev-server.sh#L16-L20) into the container
     * "mounting" is like a soft copy.  my files are linked inside the container's file system so local edits propagate to the container.
- 2. docker [exposes a port](https://github.com/mac-s-g/react-json-view/blob/master/docker/dev-server.sh#L23) on the container
+ 2. docker [exposes a port](https://github.com/microlinkhq/react-json-view/blob/master/docker/dev-server.sh#L23) on the container
     * this allows me to configure my app to listen and respond to to traffic at http://localhost:2000
     * the port is arbitrary
- 3. An [entrypoint will be invoked](https://github.com/mac-s-g/react-json-view/blob/master/docker/dev-server.sh#L24) once the container is running
-    * With my container up and running, the [entrypoint simply runs webpack dev server](https://github.com/mac-s-g/react-json-view/blob/master/entrypoints/dev-server.sh#L6).
+ 3. An [entrypoint will be invoked](https://github.com/microlinkhq/react-json-view/blob/master/docker/dev-server.sh#L24) once the container is running
+    * With my container up and running, the [entrypoint simply runs webpack dev server](https://github.com/microlinkhq/react-json-view/blob/master/entrypoints/dev-server.sh#L6).
 
 If you understand those steps, then you'll understand any of the docker scripts in `/docker/`.  They do the same thing as the dev-server script but call different entrypoints.
 

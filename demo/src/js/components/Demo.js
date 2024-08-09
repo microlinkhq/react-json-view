@@ -61,17 +61,17 @@ class Demo extends React.PureComponent {
                     <div class="header-2">component demo</div>
                     <img
                         class="rjv-logo"
-                        src="https://github.com/mac-s-g/react-json-view/blob/master/doc/rjv-icon-alt.png?raw=true"
+                        src="https://raw.githubusercontent.com/microlinkhq/react-json-view/master/doc/rjv-icon-alt.png"
                         onClick={() => {
                             window.open(
-                                'https://github.com/mac-s-g/react-json-view',
+                                'https://github.com/microlinkhq/react-json-view',
                                 '_blank'
                             );
                         }}
                     />
                     <GitHubButton
                         type="stargazers"
-                        namespace="mac-s-g"
+                        namespace="microlinkhq"
                         repo="react-json-view"
                     />
                 </div>
