@@ -25,21 +25,32 @@ export default class extends React.PureComponent {
         }
     }
 
-    handleCopy = () => {
-        const container = document.createElement('textarea');
+    copyText = async (textToCopy) => {
+        if (navigator.clipboard) {
+            return await navigator.clipboard.writeText(textToCopy);
+        } else {
+            const container = document.createElement('textarea');
+            container.innerHTML = textToCopy;
+            document.body.appendChild(container);
+            container.select();
+            document.execCommand('copy');
+            document.body.removeChild(container);
+            
+        }
+
+    }
+    
+    handleCopy = async () => {
         const { clickCallback, src, namespace } = this.props;
 
-        container.innerHTML = JSON.stringify(
+        const textToCopy = JSON.stringify(
             this.clipboardValue(src),
             null,
             '  '
         );
 
-        document.body.appendChild(container);
-        container.select();
-        document.execCommand('copy');
+        await copyText(textToCopy);
 
-        document.body.removeChild(container);
 
         this.copiedTimer = setTimeout(() => {
             this.setState({
