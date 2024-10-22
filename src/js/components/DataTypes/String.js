@@ -1,6 +1,6 @@
 import React from 'react';
 import DataTypeLabel from './DataTypeLabel';
-import { toType } from './../../helpers/util';
+import { toType, escapeString } from './../../helpers/util';
 
 //theme
 import Theme from './../../themes/getStyle';
@@ -45,6 +45,8 @@ export default class extends React.PureComponent {
         let { value } = props;
         let collapsible = toType(collapseStringsAfterLength) === 'integer';
         let style = { style: { cursor: 'default' } };
+
+        value = escapeString(value);
 
         if (collapsible && value.length > collapseStringsAfterLength) {
             style.style.cursor = 'pointer';

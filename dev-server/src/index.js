@@ -173,8 +173,25 @@ ReactDom.render(
         {/* Name as colored react component */}
         <JsonViewer
             collapsed
-            name={<span style={{color: "red", fontWeight: 800}}>React Element as name</span>}
+            name={
+                <span style={{ color: 'red', fontWeight: 800 }}>
+                    React Element as name
+                </span>
+            }
             src={getExampleJson2()}
+        />
+
+        {/* String with special escape sequences */}
+        <JsonViewer
+            collapsed
+            name="String with special escape sequences"
+            src={getExampleWithStringEscapeSequences()}
+            onEdit={e => {
+                console.log('edit callback', e);
+                if (e.new_value == 'error') {
+                    return false;
+                }
+            }}
         />
     </div>,
     document.getElementById('app-container')
@@ -291,4 +308,8 @@ function getExampleArray() {
             pretty_cool: true
         }
     ];
+}
+
+function getExampleWithStringEscapeSequences() {
+    return { '\\\n\t\r\f\\n': '\\\n\t\r\f\\n' };
 }

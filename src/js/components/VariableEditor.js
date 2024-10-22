@@ -1,7 +1,7 @@
 import React from 'react';
 import AutosizeTextarea from 'react-textarea-autosize';
 
-import { toType } from './../helpers/util';
+import { escapeString, toType } from './../helpers/util';
 import dispatcher from './../helpers/dispatcher';
 import parseInput from './../helpers/parseInput';
 import stringifyVariable from './../helpers/stringifyVariable';
@@ -59,6 +59,7 @@ class VariableEditor extends React.PureComponent {
             keyModifier
         } = this.props;
         const { editMode } = this.state;
+
         return (
             <div
                 {...Theme(theme, 'objectKeyVal', {
@@ -94,7 +95,7 @@ class VariableEditor extends React.PureComponent {
                                 <span style={{ verticalAlign: 'top' }}>"</span>
                             )}
                             <span style={{ display: 'inline-block' }}>
-                                {variable.name}
+                                {escapeString(variable.name)}
                             </span>
                             {!!quotesOnKeys && (
                                 <span style={{ verticalAlign: 'top' }}>"</span>
