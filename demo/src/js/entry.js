@@ -5,7 +5,7 @@ require('./../style/scss/global.scss')
 
 const app = document.getElementById('mac-react-container')
 
-// app entrypoint
+//app entrypoint
 ReactDom.render(
   <div class='app-entry'>
     <Index />
