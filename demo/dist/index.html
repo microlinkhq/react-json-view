@@ -2,28 +2,49 @@
 <html lang="en">
   <head>
     <title>RJV Demo</title>
-    <meta name="keywords" content="array-viewer,base-16,component,interactive,interactive-json,json,json-component,json-display,json-tree,json-view,json-viewer,json-inspector,json-tree,react,react-component,react-json,theme,tree,tree-view,treeview,mac-s-g">
-    <meta charset="UTF-8">
-    <link rel="icon"
-          type="image/ico"
-          href="./../src/style/images/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta
+      name="keywords"
+      content="array-viewer,base-16,component,interactive,interactive-json,json,json-component,json-display,json-tree,json-view,json-viewer,json-inspector,json-tree,react,react-component,react-json,theme,tree,tree-view,treeview,mac-s-g"
+    />
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/ico"
+      href="./../src/style/images/favicon.ico"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
     <!--[if lt IE 9]>
-    <script>
-    (function(){
-      var ef = function(){};
-      window.console = window.console || {log:ef,warn:ef,error:ef,dir:ef};
-    }());
-    </script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv-printshiv.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-sham.js"></script>
+      <script>
+        ;(function () {
+          var ef = function () {}
+          window.console = window.console || {
+            log: ef,
+            warn: ef,
+            error: ef,
+            dir: ef
+          }
+        })()
+      </script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv-printshiv.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-sham.js"></script>
     <![endif]-->
-    <script crossorigin src="https://unpkg.com/react@16.14.0/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16.14.0/umd/react-dom.development.js"></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16.14.0/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16.14.0/umd/react-dom.development.js"
+    ></script>
     <style>
-      body {margin:0px;}
+      body {
+        margin: 0px;
+      }
       #references {
         text-align: right;
         padding: 20px 20px 0 0;
@@ -51,21 +72,31 @@
     </style>
   </head>
   <body>
-  <div id="mac-react-container"></div>
-  <div id="references">
-    <div class="link-container">
-    <a id="npm-link" target="_blank"
-    href="https://www.npmjs.com/package/@microlink/react-json-view">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/d/db/Npm-logo.svg"/>
-    </a>
+    <div id="mac-react-container"></div>
+    <div id="references">
+      <div class="link-container">
+        <a
+          id="npm-link"
+          target="_blank"
+          href="https://www.npmjs.com/package/@microlink/react-json-view"
+        >
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/d/db/Npm-logo.svg"
+          />
+        </a>
+      </div>
+      <div class="link-container">
+        <a
+          id="github-link"
+          target="_blank"
+          href="https://github.com/microlinkhq/react-json-view"
+        >
+          <img
+            src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png"
+          />
+        </a>
+      </div>
     </div>
-    <div class="link-container">
-    <a id="github-link" target="_blank"
-    href="https://github.com/microlinkhq/react-json-view">
-      <img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png"/>
-    </a>
-    </div>
-  </div>
-  <script type="text/javascript" src="./main.js"></script>
+    <script type="text/javascript" src="./main.js"></script>
   </body>
 </html>

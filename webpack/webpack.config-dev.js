@@ -1,50 +1,48 @@
-const path = require("path")
-const webpack = require("webpack")
+const path = require('path')
+const webpack = require('webpack')
 
 const PATHS = {
-  src: path.join(__dirname, "..", "src"),
-  js: path.join(__dirname, "..", "src", "js"),
-  style: path.join(__dirname, "..", "src", "style"),
-  build: path.join(__dirname, "..", "dev-server", "dist"),
-  devServer: path.join(__dirname, "..", "dev-server")
+  src: path.join(__dirname, '..', 'src'),
+  js: path.join(__dirname, '..', 'src', 'js'),
+  style: path.join(__dirname, '..', 'src', 'style'),
+  build: path.join(__dirname, '..', 'dev-server', 'dist'),
+  devServer: path.join(__dirname, '..', 'dev-server')
 }
 
 const config = {
   mode: 'development',
-  entry: [PATHS.devServer + "/src/index.js"],
+  entry: [PATHS.devServer + '/src/index.js'],
   externals: {
-    react: "React",
-    "react-dom": "ReactDOM"
+    react: 'React',
+    'react-dom': 'ReactDOM'
   },
   devServer: {
-    host: "localhost",
+    host: 'localhost',
     port: 2000,
     historyApiFallback: true,
     static: PATHS.build
   },
   output: {
     path: PATHS.build,
-    filename: "main.js",
-    library: "reactJsonView",
-    libraryTarget: "umd"
+    filename: 'main.js',
+    library: 'reactJsonView',
+    libraryTarget: 'umd'
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
   optimization: {
     minimize: false
   },
   resolve: {
-    extensions: [".js", ".json", ".css", ".scss"]
+    extensions: ['.js', '.json', '.css', '.scss']
   },
-  devtool: "eval-source-map",
+  devtool: 'eval-source-map',
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         use: [
           {
-            loader: "babel-loader"
+            loader: 'babel-loader'
           }
         ],
         include: [PATHS.js, PATHS.devServer]
