@@ -13,7 +13,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => {}}
+        onEdit={edit => { }}
         rjvId={rjvId}
         singleIndent={1}
         variable={{
@@ -48,7 +48,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => {}}
+        onEdit={edit => { }}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -66,7 +66,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => {}}
+        onEdit={edit => { }}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -172,7 +172,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => {}}
+        onEdit={edit => { }}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -192,7 +192,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => {}}
+        onEdit={edit => { }}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -212,7 +212,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => {}}
+        onEdit={edit => { }}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -232,7 +232,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => {}}
+        onEdit={edit => { }}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -252,7 +252,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => {}}
+        onEdit={edit => { }}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -274,7 +274,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => {}}
+        onEdit={edit => { }}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -294,7 +294,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => {}}
+        onEdit={edit => { }}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -314,7 +314,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => {}}
+        onEdit={edit => { }}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -334,7 +334,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => {}}
+        onEdit={edit => { }}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -347,5 +347,29 @@ describe('<VariableEditor />', function () {
     wrapper.find('.click-to-edit-icon').simulate('click')
     expect(wrapper.state('editMode')).to.equal(true)
     expect(wrapper.find('.variable-editor').props().value).to.equal('5')
+  })
+
+  it('VariableEditor renders escaped characters', function () {
+    const wrapper = shallow(
+      <VariableEditor
+        src={{ test: true }}
+        theme='rjv-default'
+        onEdit={edit => { }}
+        rjvId={rjvId}
+        variable={{
+          name: '\\\n\t\r\f\\n',
+          value: '\\\n\t\r\f\\n',
+          type: 'string'
+        }}
+      />
+    )
+    console.log(wrapper.debug())
+    expect(wrapper.find('.object-key').text()).to.equal('\\\\\\n\\t\\r\\f\\\\n')
+    expect(wrapper.find('.click-to-edit-icon').length).to.equal(1)
+    wrapper.find('.click-to-edit-icon').simulate('click')
+    expect(wrapper.state('editMode')).to.equal(true)
+    expect(wrapper.find('.variable-editor').props().value).to.equal(
+      '\\\n\t\r\f\\n'
+    )
   })
 })

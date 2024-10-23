@@ -61,4 +61,18 @@ describe('<JsonString />', function () {
       '"123456789"'
     )
   })
+
+  it('string with special escape sequences', function () {
+    const rjvId = 1
+    const props = {
+      value: '\\\n\t\r\f\\n',
+      rjvId: 1,
+      displayDataTypes: false,
+      theme: 'rjv-default'
+    }
+    const component = mount(<JsonString {...props} />).render()
+    expect(component.find('.string-value').text()).to.equal(
+      '"\\\\\\n\\t\\r\\f\\\\n"'
+    )
+  })
 })
