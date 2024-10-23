@@ -180,6 +180,19 @@ ReactDom.render(
       }
       src={getExampleJson2()}
     />
+
+    {/* String with special escape sequences */}
+    <JsonViewer
+      collapsed
+      name='String with special escape sequences'
+      src={getExampleWithStringEscapeSequences()}
+      onEdit={e => {
+        console.log('edit callback', e)
+        if (e.new_value == 'error') {
+          return false
+        }
+      }}
+    />
   </div>,
   document.getElementById('app-container')
 )
@@ -189,7 +202,7 @@ ReactDom.render(
 /*-------------------------------------------------------------------------*/
 
 //just a function to get an example JSON object
-function getExampleJson1 () {
+function getExampleJson1() {
   return {
     string: 'this is a test string',
     integer: 42,
@@ -218,7 +231,7 @@ function getExampleJson1 () {
 }
 
 //and another a function to get an example JSON object
-function getExampleJson2 () {
+function getExampleJson2() {
   return {
     normalized: {
       '1-grams': {
@@ -256,7 +269,7 @@ function getExampleJson2 () {
   }
 }
 
-function getExampleJson3 () {
+function getExampleJson3() {
   return {
     example_information:
       'this example has the collapsed prop set to true and the indentWidth prop is set to 8',
@@ -272,7 +285,7 @@ function getExampleJson3 () {
   }
 }
 
-function getExampleJson4 () {
+function getExampleJson4() {
   const large_array = new Array(225).fill('this is a large array full of items')
 
   large_array.push(getExampleArray())
@@ -282,7 +295,7 @@ function getExampleJson4 () {
   return large_array
 }
 
-function getExampleArray () {
+function getExampleArray() {
   return [
     'you can also display arrays!',
     new Date(),
@@ -293,4 +306,8 @@ function getExampleArray () {
       pretty_cool: true
     }
   ]
+}
+
+function getExampleWithStringEscapeSequences() {
+  return { '\\\n\t\r\f\\n': '\\\n\t\r\f\\n' }
 }

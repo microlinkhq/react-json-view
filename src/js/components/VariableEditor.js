@@ -1,7 +1,7 @@
 import React from 'react'
 import AutosizeTextarea from 'react-textarea-autosize'
 
-import { toType } from './../helpers/util'
+import { escapeString } from './../helpers/util'
 import dispatcher from './../helpers/dispatcher'
 import parseInput from './../helpers/parseInput'
 import stringifyVariable from './../helpers/stringifyVariable'
@@ -93,7 +93,7 @@ class VariableEditor extends React.PureComponent {
                 {!!quotesOnKeys && (
                   <span style={{ verticalAlign: 'top' }}>"</span>
                 )}
-                <span style={{ display: 'inline-block' }}>{variable.name}</span>
+                <span style={{ display: 'inline-block' }}>{escapeString(variable.name)}</span>
                 {!!quotesOnKeys && (
                   <span style={{ verticalAlign: 'top' }}>"</span>
                 )}

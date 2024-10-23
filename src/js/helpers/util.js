@@ -23,6 +23,15 @@ function getType (obj) {
     .toLowerCase()
 }
 
+export function escapeString (value) {
+  return value
+    .replace(/\\/g, '\\\\')
+    .replace(/\n/g, '\\n')
+    .replace(/\t/g, '\\t')
+    .replace(/\r/g, '\\r')
+    .replace(/\f/g, '\\f')
+}
+
 // validation for base-16 themes
 export function isTheme (theme) {
   const theme_keys = [

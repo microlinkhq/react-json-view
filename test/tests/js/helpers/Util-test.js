@@ -1,7 +1,7 @@
 import React from 'react'
 import { expect } from 'chai'
 
-import { toType, isTheme } from './../../../../src/js/helpers/util'
+import { toType, isTheme, escapeString } from './../../../../src/js/helpers/util'
 
 describe('toType', function () {
   it('toType object', function () {
@@ -30,7 +30,7 @@ describe('toType', function () {
   })
 
   it('toType function', function () {
-    const test = () => {}
+    const test = () => { }
     expect(toType(test)).to.equal('function')
   })
 
@@ -57,6 +57,33 @@ describe('toType', function () {
   it('toType regexp', function () {
     const test = undefined
     expect(toType(test)).to.equal('undefined')
+  })
+})
+
+describe('escapeString', function () {
+  it('escape \\\\', function () {
+    const test = '\\'
+    expect(escapeString(test)).to.equal('\\\\')
+  })
+  it('escape \\n', function () {
+    const test = '\n'
+    expect(escapeString(test)).to.equal('\\n')
+  })
+  it('escape \\t', function () {
+    const test = '\t'
+    expect(escapeString(test)).to.equal('\\t')
+  })
+  it('escape \\r', function () {
+    const test = '\r'
+    expect(escapeString(test)).to.equal('\\r')
+  })
+  it('escape \\f', function () {
+    const test = '\f'
+    expect(escapeString(test)).to.equal('\\f')
+  })
+  it('escape \\\\n', function () {
+    const test = '\\n'
+    expect(escapeString(test)).to.equal('\\\\n')
   })
 })
 
