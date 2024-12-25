@@ -25,9 +25,13 @@ export default class extends React.PureComponent {
     }
   }
 
-  copyToClipboardFallback = textToCopy => {
+  toClipboard = async textToCopy => {
+    if (navigator.clipboard) return navigator.clipboard.writeText(textToCopy)
     const textArea = document.createElement('textarea')
     textArea.value = textToCopy
+    textArea.style.top = '0'
+    textArea.style.left = '0'
+    textArea.style.position = 'fixed'
     document.body.appendChild(textArea)
     textArea.select()
     document.execCommand('copy')
@@ -37,17 +41,7 @@ export default class extends React.PureComponent {
   handleCopy = () => {
     const { clickCallback, src, namespace } = this.props
 
-    const textToCopy = JSON.stringify(this.clipboardValue(src), null, '  ')
-
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(textToCopy).catch(() => {
-        // Fallback for non-secure contexts (i.e. http)
-        this.copyToClipboardFallback(textToCopy)
-      })
-    } else {
-      // Fallback for old browsers and test environments
-      this.copyToClipboardFallback(textToCopy)
-    }
+    this.toClipboard(JSON.stringify(this.clipboardValue(src), null, '  '))
 
     this.copiedTimer = setTimeout(() => {
       this.setState({
@@ -95,7 +89,7 @@ export default class extends React.PureComponent {
   }
 
   render () {
-    const { src, theme, hidden, rowHovered } = this.props
+    const { theme, hidden, rowHovered } = this.props
     const style = Theme(theme, 'copy-to-clipboard').style
     let display = 'inline'
 
