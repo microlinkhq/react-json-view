@@ -29,6 +29,42 @@
       src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"
     ></script>
     <style>
+      body {
+        padding-top: 50px;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .title {
+        margin: 0;
+        padding: 0px 30px;
+        background-color: #fff;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 36px;
+        z-index: 2;
+      }
+
+      .switch {
+        position: fixed;
+        right: 10px;
+        top: 6px;
+        z-index: 10;
+        color: rgb(233, 233, 233);
+      }
+
+      .switch a {
+        color: rgb(190, 189, 189);
+      }
+
+      .switch a:active {
+        color: rgb(85, 26, 139);
+      }
+
       .react-json-view {
         padding: 4px 6px;
         border-radius: 3px;
@@ -37,6 +73,16 @@
     </style>
   </head>
   <body>
+    <div class="switch">
+      <a href="/" title="json to ReactJsonView prop 'src'">
+        Index
+      </a> | <a href="/?json_string=false" title="json to ReactPureJsonView prop 'src'">
+        Json[ReactPureJsonView]
+      </a> <b style="color: blue">vs.</b> <a href="/?json_string=true" title="json string to ReactPureJsonView prop 'src'">
+          Json String[ReactPureJsonView]
+      </a>
+    </div>
+    <h2 id="app-title" class="title"></h2>
     <div id="app-container"></div>
     <script type="text/javascript" src="./main.js"></script>
   </body>

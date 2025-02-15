@@ -167,6 +167,10 @@ export interface ReactJsonViewProps {
   escapeStrings?: boolean
 }
 
+export interface ReactPureJsonViewProps extends ReactJsonViewProps {
+  src: ReactJsonViewProps['src'] | string
+}
+
 export interface OnCopyProps {
   /**
    * The JSON tree source object
@@ -310,3 +314,9 @@ export type ThemeKeys =
 
 declare const ReactJson: React.ComponentType<ReactJsonViewProps>
 export default ReactJson
+
+declare const defaultBigNumberImplement: typeof import('bignumber.js').BigNumber
+declare const defaultJSONImplement: typeof import('json-bigint')
+declare const ReactPureJsonView: React.ComponentType<ReactPureJsonViewProps>
+
+export { ReactPureJsonView, defaultBigNumberImplement, defaultJSONImplement }

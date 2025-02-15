@@ -207,6 +207,8 @@
     "treeview"
   ],
   "dependencies": {
+    "bignumber.js": "~9.1.2",
+    "json-bigint": "~1.0.0",
     "react-base16-styling": "~0.9.0",
     "react-lifecycles-compat": "~3.0.4",
     "react-textarea-autosize": "~8.5.7"
