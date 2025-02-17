@@ -6,4 +6,9 @@ import ReactPureJsonView, {
 
 export default ReactJsonView
 
-export { ReactPureJsonView, defaultBigNumberImplement, defaultJSONImplement }
+export {
+  ReactJsonView,
+  ReactPureJsonView,
+  defaultBigNumberImplement,
+  defaultJSONImplement
+}
