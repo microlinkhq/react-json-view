@@ -104,6 +104,57 @@ The following object will be passed to your method:
 
 Returning `false` from a callback method will prevent the src from being affected.
 
+### `ReactPureJsonView` component
+
+#### Why is it needed
+
+Users usually use this repository to directly connect and display `static data` (such as external JSON files, other API operation results, etc.). These static data may have (Javascript language) big number ([example](https://www.geeksforgeeks.org/how-to-deal-with-large-numbers-in-javascript/)) and floating point ([example](https://stackoverflow.com/a/55291279)) problems, and users are more interested in correctly displaying the static data and do not care about the data involving different languages ​​(Javascript) problems.
+
+#### Usage
+
+- JSON String Example
+
+  ```js
+  import { ReactPureJsonView } from '@microlink/react-json-view'
+
+  /**
+   * Get `src` (json string) from the external file
+   *
+   * @type {String}
+   */
+  const data = await fetch('data/data.json')
+
+  <ReactPureJsonView src={data} />
+  ```
+
+- JSON Object Example (legacy mode, the same as [ReactJsonView Usage](#usage))
+
+  ```js
+  import { ReactPureJsonView } from '@microlink/react-json-view'
+
+  <ReactPureJsonView src={{
+    string: 'this is a test string',
+    integer: 42,
+    array: [1, 2, 3, 'test', NaN],
+    float: 3.14159,
+    undefined: undefined,
+    object: {
+      'first-child': true,
+      'second-child': false,
+      'last-child': null
+      },
+    string_number: '1234',
+    date: new Date(),
+    bigNumber: new BigNumber('0.0060254656709730629123')
+  }} />
+  ```
+
+#### API
+
+| Name                         | Type                                             | Default                  | Description                                                                                                                                                                                                                                                               |
+|:-----------------------------|:-------------------------------------------------|:-------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `src`                        | `JSON Object` or `JSON String`                   | None                     | This property contains your input JSON (object or json-string).                                                                                                                                                                                                           |
+
 ### Theming
 
 #### Builtin theme
