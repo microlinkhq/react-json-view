@@ -337,7 +337,8 @@ class Demo extends React.PureComponent {
         options={[
           { value: 'circle', label: 'circle' },
           { value: 'square', label: 'square' },
-          { value: 'triangle', label: 'triangle' }
+          { value: 'triangle', label: 'triangle' },
+          { value: 'chevron', label: 'chevron' }
         ]}
         onChange={val => {
           this.set('iconStyle', val)

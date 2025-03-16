@@ -28,11 +28,11 @@ export interface ReactJsonViewProps {
    */
   style?: React.CSSProperties
   /**
-   * Style of expand/collapse icons. Accepted values are "circle", triangle" or "square".
+   * Style of expand/collapse icons. Accepted values are "circle", triangle" or "square" or "chevron".
    *
    * Default: {}
    */
-  iconStyle?: 'circle' | 'triangle' | 'square'
+  iconStyle?: 'circle' | 'triangle' | 'square' | 'chevron'
   /**
    * Set the indent-width for nested objects.
    *
