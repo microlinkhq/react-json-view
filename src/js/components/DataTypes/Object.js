@@ -136,14 +136,16 @@ class RjvObject extends React.PureComponent {
   }
 
   getBraceStart (object_type, expanded) {
-    const { src, theme, iconStyle, parent_type } = this.props
+    const { src, theme, iconStyle, parent_type, displayCompact } = this.props
 
     if (parent_type === 'array_group') {
       return (
         <span>
-          <span {...Theme(theme, 'brace')}>
-            {object_type === 'array' ? '[' : '{'}
-          </span>
+          {!displayCompact && (
+            <span {...Theme(theme, 'brace')}>
+              {object_type === 'array' ? '[' : '{'}
+            </span>
+          )}
           {expanded ? this.getObjectMetaData(src) : null}
         </span>
       )
@@ -163,9 +165,11 @@ class RjvObject extends React.PureComponent {
             <IconComponent {...{ theme, iconStyle }} />
           </div>
           <ObjectName {...this.props} />
-          <span {...Theme(theme, 'brace')}>
-            {object_type === 'array' ? '[' : '{'}
-          </span>
+          {!displayCompact && (
+            <span {...Theme(theme, 'brace')}>
+              {object_type === 'array' ? '[' : '{'}
+            </span>
+          )}
         </span>
         {expanded ? this.getObjectMetaData(src) : null}
       </span>
@@ -185,6 +189,7 @@ class RjvObject extends React.PureComponent {
       theme,
       jsvRoot,
       iconStyle,
+      displayCompact,
       ...rest
     } = this.props
 
@@ -210,18 +215,21 @@ class RjvObject extends React.PureComponent {
           ? this.getObjectContent(depth, src, {
             theme,
             iconStyle,
+            displayCompact,
             ...rest
           })
           : this.getEllipsis()}
         <span class='brace-row'>
-          <span
-            style={{
-              ...Theme(theme, 'brace').style,
-              paddingLeft: expanded ? '3px' : '0px'
-            }}
-          >
-            {object_type === 'array' ? ']' : '}'}
-          </span>
+          {!displayCompact && (
+            <span
+              style={{
+                ...Theme(theme, 'brace').style,
+                paddingLeft: expanded ? '3px' : '0px'
+              }}
+            >
+              {object_type === 'array' ? ']' : '}'}
+            </span>
+          )}
           {expanded ? null : this.getObjectMetaData(src)}
         </span>
       </div>

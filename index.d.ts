@@ -94,6 +94,13 @@ export interface ReactJsonViewProps {
    */
   displayArrayKey?: boolean
   /**
+   * When set to true, hides display of `:`, `{`, and `[` symbols for parent objects
+   * and arrays that are not the final value in the hierarchy.
+   *
+   * Default: false
+   */
+  displayCompact?: boolean
+  /**
    * set to false to remove quotes from keys (eg. "name": vs. name:)
    *
    * Default: true

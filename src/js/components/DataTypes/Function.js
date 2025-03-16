@@ -66,9 +66,9 @@ export default class extends React.PureComponent {
             .slice(9, -1)
             .replace(/\{[\s\S]+/, '')}
           <span class='function-collapsed' style={{ fontWeight: 'bold' }}>
-            <span>{'{'}</span>
+            {!this.props.displayCompact && <span>{'{'}</span>}
             <span {...Theme(props.theme, 'ellipsis')}>...</span>
-            <span>{'}'}</span>
+            {!this.props.displayCompact && <span>{'}'}</span>}
           </span>
         </span>
       )
