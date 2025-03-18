@@ -1,6 +1,5 @@
 // returns a string "type" of input object
 export function toType (obj, bigNumber) {
-
   /* Check if the object is an instance of the custom BigNumber class passed in as a prop
    * If it matches, return 'bigNumber' type so it can be displayed appropriately
    */
@@ -68,4 +67,15 @@ export function isTheme (theme) {
     return true
   }
   return false
+}
+
+export function getBraceChar (object_type, end = false) {
+  switch (object_type) {
+    case 'array':
+    case 'map':
+    case 'set':
+      return end ? ']' : '['
+    default:
+      return end ? '}' : '{'
+  }
 }

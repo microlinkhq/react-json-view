@@ -12,10 +12,10 @@ import JsonViewer from './../../src/js/index'
 // custom big number class, You can use existing libraries like `bignumber.js`, `decimal.js`, `big.js` etc.
 class BigNumber {
   name = 'customName'
-  constructor(value) {
+  constructor (value) {
     this.value = value
   }
-  toString() {
+  toString () {
     return this.value.toString()
   }
 }
@@ -231,6 +231,8 @@ function getExampleJson1 () {
         }
       }
     },
+    map: getExampleMap(),
+    set: getExampleSet(),
     string_number: '1234',
     date: new Date(),
     moment: Moment(),
@@ -319,4 +321,49 @@ function getExampleArray () {
 
 function getExampleWithStringEscapeSequences () {
   return { '\\\n\t\r\f\\n': '\\\n\t\r\f\\n' }
+}
+
+function getExampleMap () {
+  return new Map([
+    ['string', 'string_value'],
+    [1, 'number_value'],
+    [1.1, 'float_value'],
+    [true, 'boolean_value'],
+    [
+      () => {
+        return 'function_value'
+      },
+      'function_value'
+    ],
+    [null, 'null_value'],
+    [NaN, 'NaN_value'],
+    [undefined, 'undefined_value'],
+    [new Date(), 'date_value'],
+    [new RegExp('regexp_value'), 'regexp_value'],
+    [new BigNumber('0.0060254656709730629123'), 'bigNumber_value'],
+    [{ example: 'object' }, 'object_value'],
+    [new Map([['nested_key', 'nested_value']]), 'map_value'],
+    [new Set([1, 2, 3]), 'set_value']
+  ])
+}
+
+function getExampleSet () {
+  return new Set([
+    'string',
+    1,
+    1.1,
+    true,
+    () => {
+      return 'function_value'
+    },
+    null,
+    NaN,
+    undefined,
+    new Date(),
+    new RegExp('regexp_value'),
+    new BigNumber('0.0060254656709730629123'),
+    { example: 'object' },
+    new Map([['nested_key', 'nested_value']]),
+    new Set([1, 2, 3])
+  ])
 }
