@@ -28,6 +28,7 @@ class Demo extends React.PureComponent {
     enableClipboard: true,
     indentWidth: 4,
     displayDataTypes: true,
+    displayCompact: false,
     iconStyle: 'triangle'
   }
 
@@ -135,7 +136,8 @@ class Demo extends React.PureComponent {
       iconStyle,
       collapsed,
       indentWidth,
-      displayDataTypes
+      displayDataTypes,
+      displayCompact
     } = this.state
 
     const style = {
@@ -214,6 +216,7 @@ class Demo extends React.PureComponent {
             enableClipboard={enableClipboard}
             indentWidth={indentWidth}
             displayDataTypes={displayDataTypes}
+            displayCompact={displayCompact}
             iconStyle={iconStyle}
           />
 
@@ -264,6 +267,10 @@ class Demo extends React.PureComponent {
             <div class='rjv-input'>
               <div class='rjv-label'>Collapse Strings After Length:</div>
               {this.getCollapsedStringsInput(collapseStringsAfter)}
+            </div>
+            <div class='rjv-input'>
+              <div class='rjv-label'>Display Compact</div>
+              {this.getCompactInput(displayCompact)}
             </div>
           </div>
 
@@ -330,7 +337,8 @@ class Demo extends React.PureComponent {
         options={[
           { value: 'circle', label: 'circle' },
           { value: 'square', label: 'square' },
-          { value: 'triangle', label: 'triangle' }
+          { value: 'triangle', label: 'triangle' },
+          { value: 'chevron', label: 'chevron' }
         ]}
         onChange={val => {
           this.set('iconStyle', val)
@@ -430,6 +438,22 @@ class Demo extends React.PureComponent {
         ]}
         onChange={val => {
           this.set('displayDataTypes', val)
+        }}
+      />
+    )
+  }
+
+  getCompactInput = displayCompact => {
+    return (
+      <ReactSelect
+        name='display-compact'
+        value={displayCompact}
+        options={[
+          { value: true, label: 'true' },
+          { value: false, label: 'false' }
+        ]}
+        onChange={val => {
+          this.set('displayCompact', val)
         }}
       />
     )

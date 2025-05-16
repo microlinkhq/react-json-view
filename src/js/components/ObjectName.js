@@ -9,7 +9,8 @@ export default function getObjectName (props) {
     theme,
     jsvRoot,
     name,
-    displayArrayKey
+    displayArrayKey,
+    displayCompact
   } = props
 
   const display_name = props.name ? props.name : ''
@@ -21,7 +22,7 @@ export default function getObjectName (props) {
       ? (
         <span {...Theme(theme, 'array-key')} key={namespace}>
           <span class='array-key'>{display_name}</span>
-          <span {...Theme(theme, 'colon')}>:</span>
+          {!displayCompact && <span {...Theme(theme, 'colon')}>:</span>}
         </span>
         )
       : (
@@ -35,7 +36,7 @@ export default function getObjectName (props) {
           <span>{display_name}</span>
           {quotesOnKeys && <span style={{ verticalAlign: 'top' }}>"</span>}
         </span>
-        <span {...Theme(theme, 'colon')}>:</span>
+        {!displayCompact && <span {...Theme(theme, 'colon')}>:</span>}
       </span>
     )
   }

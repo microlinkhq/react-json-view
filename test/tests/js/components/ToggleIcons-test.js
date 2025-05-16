@@ -13,7 +13,9 @@ import {
   SquareMinus,
   SquarePlus,
   ArrowRight,
-  ArrowDown
+  ArrowDown,
+  ChevronRight,
+  ChevronDown
 } from './../../../../src/js/components/icons'
 
 describe('<ToggleIcons />', function () {
@@ -41,6 +43,13 @@ describe('<ToggleIcons />', function () {
     expect(wrapper.type()).to.equal(SquareMinus)
   })
 
+  it('ExpandedIcon with chevron style', function () {
+    const wrapper = shallow(
+      <ExpandedIcon theme='rjv-default' iconStyle='chevron' />
+    )
+    expect(wrapper.type()).to.equal(ChevronDown)
+  })
+
   it('ExpandedIcon with no style', function () {
     const wrapper = shallow(<ExpandedIcon theme='rjv-default' />)
     expect(wrapper.type()).to.equal(CircleMinus)
@@ -58,6 +67,13 @@ describe('<ToggleIcons />', function () {
       <CollapsedIcon theme='rjv-default' iconStyle='square' />
     )
     expect(wrapper.type()).to.equal(SquarePlus)
+  })
+
+  it('CollapsedIcon with chevron style', function () {
+    const wrapper = shallow(
+      <CollapsedIcon theme='rjv-default' iconStyle='chevron' />
+    )
+    expect(wrapper.type()).to.equal(ChevronRight)
   })
 
   it('CollapsedIcon with no style', function () {
