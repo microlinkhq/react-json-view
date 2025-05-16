@@ -35,6 +35,11 @@ export default {
 
   variableValuePaddingRight: '6px',
 
+  mapSetFontSize: '11px',
+  mapSetFontWeight: 'bold',
+  mapSetPadding: '1px 2px',
+  mapSetBorderRadius: '3px',
+
   nullFontSize: '11px',
   nullFontWeight: 'bold',
   nullPadding: '1px 2px',

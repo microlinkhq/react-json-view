@@ -1,6 +1,6 @@
 import React from 'react'
 import { polyfill } from 'react-lifecycles-compat'
-import { toType } from './../../helpers/util'
+import { getBraceChar, toType } from './../../helpers/util'
 
 // data type components
 import { JsonObject } from './DataTypes'
@@ -46,6 +46,9 @@ class RjvObject extends React.PureComponent {
           type: toType(props.src),
           namespace: props.namespace
         }) === false) &&
+      // initialize closed if type is set or map
+      props.type !== 'set' &&
+      props.type !== 'map' &&
       // initialize closed if object has no items
       size !== 0
     const state = {
@@ -141,9 +144,7 @@ class RjvObject extends React.PureComponent {
     if (parent_type === 'array_group') {
       return (
         <span>
-          <span {...Theme(theme, 'brace')}>
-            {object_type === 'array' ? '[' : '{'}
-          </span>
+          <span {...Theme(theme, 'brace')}>{getBraceChar(object_type)}</span>
           {expanded ? this.getObjectMetaData(src) : null}
         </span>
       )
@@ -163,8 +164,11 @@ class RjvObject extends React.PureComponent {
             <IconComponent {...{ theme, iconStyle }} />
           </div>
           <ObjectName {...this.props} />
+          {['map', 'set'].includes(this.props.type) && (
+            <span {...Theme(theme, this.props.type)}>{this.props.type}</span>
+          )}
           <span {...Theme(theme, 'brace')}>
-            {object_type === 'array' ? '[' : '{'}
+            {getBraceChar(this.props.type)}
           </span>
         </span>
         {expanded ? this.getObjectMetaData(src) : null}
@@ -220,7 +224,7 @@ class RjvObject extends React.PureComponent {
               paddingLeft: expanded ? '3px' : '0px'
             }}
           >
-            {object_type === 'array' ? ']' : '}'}
+            {getBraceChar(type, true)}
           </span>
           {expanded ? null : this.getObjectMetaData(src)}
         </span>
@@ -234,13 +238,18 @@ class RjvObject extends React.PureComponent {
       parent_type,
       index_offset,
       groupArraysAfterLength,
-      namespace
+      namespace,
+      type
     } = this.props
     const { object_type } = this.state
     const elements = []
     let variable
     let keys = Object.keys(variables || {})
-    if (this.props.sortKeys && object_type !== 'array') {
+    if (
+      this.props.sortKeys &&
+      object_type !== 'array' &&
+      !['set', 'map'].includes(type)
+    ) {
       keys = keys.sort()
     }
 
@@ -282,6 +291,31 @@ class RjvObject extends React.PureComponent {
             namespace={namespace.concat(variable.name)}
             type='array'
             parent_type={object_type}
+            {...props}
+          />
+        )
+      } else if (['map', 'set'].includes(variable.type)) {
+        const formatted = []
+        variable.value.forEach((value, key) => {
+          if (variable.type === 'map') {
+            formatted.push({
+              key,
+              value
+            })
+          } else {
+            formatted.push(value)
+          }
+        })
+
+        elements.push(
+          <JsonObject
+            key={variable.name}
+            depth={depth + DEPTH_INCREMENT}
+            name={variable.name}
+            src={formatted}
+            namespace={namespace.concat(variable.name)}
+            parent_type={object_type}
+            type={variable.type}
             {...props}
           />
         )
