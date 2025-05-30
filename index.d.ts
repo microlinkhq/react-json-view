@@ -165,6 +165,12 @@ export interface ReactJsonViewProps {
    * Default: true
    */
   escapeStrings?: boolean
+  /**
+   * Adds custom buttons according to the value type.
+   *
+   * Default: null
+   */
+  customButtons?: TypeCustomButtons
 }
 
 export interface OnCopyProps {
@@ -307,6 +313,16 @@ export type ThemeKeys =
   | 'tomorrow'
   | 'tube'
   | 'twilight'
+
+export type TypeCustomButtons = {
+  [valueType: string]: {
+    clickCallback: (element: { variableName: string; src: string; namespace: Array<string>; name: string; }) => void
+    path: React.ReactElement<React.SVGProps<SVGPathElement>> | ((element: { variableName: string; src: string; namespace: Array<string>; name: string; }) => React.ReactElement<React.SVGProps<SVGPathElement>>)
+    viewBox?: string | ((element: { variableName: string; src: string; namespace: Array<string>; name: string; }) => string)
+    title?: string | ((element: { variableName: string; src: string; namespace: Array<string>; name: string; }) => string)
+    className?: string | ((element: { variableName: string; src: string; namespace: Array<string>; name: string; }) => string)
+  }
+}
 
 declare const ReactJson: React.ComponentType<ReactJsonViewProps>
 export default ReactJson

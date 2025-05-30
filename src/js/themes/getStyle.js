@@ -234,6 +234,16 @@ const getDefaultThemeStyling = theme => {
       color: colors.copyToClipboardCheck,
       marginLeft: constants.clipboardCheckMarginLeft
     },
+    'custom-button': {
+      cursor: 'pointer'
+    },
+    'custom-icon': {
+      color: 'currentColor',
+      fontSize: constants.iconFontSize,
+      marginRight: constants.iconMarginRight,
+      verticalAlign: 'top',
+      transition: 'color 150ms ease-in-out'
+    },
     'array-group-meta-data': {
       display: 'inline-block',
       padding: constants.arrayGroupMetaPadding

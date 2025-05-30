@@ -25,7 +25,7 @@ export default class extends React.PureComponent {
     return (
       <div className='pretty-json-container object-container'>
         <div className='object-content'>
-          <ObjectComponent namespace={namespace} depth={0} jsvRoot {...props} />
+          <ObjectComponent namespace={namespace} depth={0} jsvRoot customButtons={{}} {...props} />
         </div>
       </div>
     )

@@ -50,6 +50,7 @@ export default class extends React.PureComponent {
       jsvRoot,
       namespace,
       parent_type,
+      customButtons,
       ...rest
     } = this.props
 
@@ -74,7 +75,7 @@ export default class extends React.PureComponent {
         <ObjectName {...this.props} />
 
         <span>
-          <VariableMeta size={src.length} {...this.props} />
+          <VariableMeta customButtons={customButtons} size={src.length} {...this.props} />
         </span>
         {[...Array(groups)].map((_, i) => (
           <div

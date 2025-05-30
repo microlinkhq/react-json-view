@@ -137,7 +137,7 @@ ReactDom.render(
 
     <br />
 
-    {/*demo array support*/}
+    {/* demo array support */}
     <JsonViewer
       src={getExampleArray()}
       theme='solarized'
@@ -200,6 +200,172 @@ ReactDom.render(
       theme='monokai'
       name='String with special escape sequences'
       src={getExampleWithStringEscapeSequences()}
+    />
+
+    {/* Custom buttons according to the value type */}
+    <JsonViewer
+      bigNumber={BigNumber}
+      sortKeys
+      style={{ padding: '30px', backgroundColor: 'white' }}
+      src={getExampleJson5()}
+      quotesOnKeys={false}
+      collapseStringsAfterLength={12}
+      customButtons={{
+        boolean: {
+          clickCallback: (element) => { console.log(JSON.stringify(element, null, 4)) },
+          path: <path d="m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" />,
+          viewBox: '0 0 40 40',
+          title: 'A title example',
+          className: 'class-example'
+        },
+        integer: {
+          clickCallback: (element) => { console.log(JSON.stringify(element, null, 4)) },
+          path: (element) => element.src === 27
+            ? <path d='M0 14l6-6-6-6z' />
+            : <path d="m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" />,
+          viewBox: (element) => element.src === 27
+            ? '0 0 15 15'
+            : '0 0 40 40',
+          title: (element) => element.src === 27
+            ? 'Special title'
+            : 'Example title',
+          className: (element) => element.src === 27
+            ? 'special-class'
+            : 'class-example'
+        },
+        float: {
+          clickCallback: (element) => { console.log(JSON.stringify(element, null, 4)) },
+          path: <path d="m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" />,
+          viewBox: '0 0 40 40',
+          title: 'A title example',
+          className: 'class-example'
+        },
+        bigNumber: {
+          clickCallback: (element) => { console.log(JSON.stringify(element, null, 4)) },
+          path: <path d="m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" />,
+          viewBox: '0 0 40 40',
+          title: 'A title example',
+          className: 'class-example'
+        },
+        date: {
+          clickCallback: (element) => { console.log(JSON.stringify(element, null, 4)) },
+          path: <path d="m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" />,
+          viewBox: '0 0 40 40',
+          title: 'A title example',
+          className: 'class-example'
+        },
+        string: {
+          clickCallback: (element) => { console.log(JSON.stringify(element, null, 4)) },
+          path: (element) => element.variableName === 'string-key-test'
+            ? <path d='M1344 800v64q0 14-9 23t-23 9h-352v352q0 14-9 23t-23 9h-64q-14 0-23-9t-9-23v-352h-352q-14 0-23-9t-9-23v-64q0-14 9-23t23-9h352v-352q0-14 9-23t23-9h64q14 0 23 9t9 23v352h352q14 0 23 9t9 23zm128 448v-832q0-66-47-113t-113-47h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113zm128-832v832q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q119 0 203.5 84.5t84.5 203.5z' />
+            : <path d="m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" />,
+          viewBox: (element) => element.variableName === 'string-key-test'
+            ?'0 0 1792 1792'
+            :'0 0 40 40',
+          title: (element) => element.variableName === 'string-key-test'
+            ? 'Special title'
+            : 'Title example',
+          className: (element) => element.variableName === 'string-key-test'
+            ? 'special-class'
+            : 'class-example'
+        },
+        regexp: {
+          clickCallback: (element) => { console.log(JSON.stringify(element, null, 4)) },
+          path: <path d="m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" />,
+          viewBox: '0 0 40 40',
+          title: 'A title example',
+          className: 'class-example'
+        },
+        array: {
+          clickCallback: (element) => { console.log(JSON.stringify(element, null, 4)) },
+          path: <path d="m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" />,
+          viewBox: '0 0 40 40',
+          title: 'A title example',
+          className: 'class-example'
+        },
+        empty_array: {
+          clickCallback: (element) => { console.log(JSON.stringify(element, null, 4)) },
+          path: <path d="m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" />,
+          viewBox: '0 0 40 40',
+          title: 'A title example',
+          className: 'class-example'
+        },
+        object: {
+          clickCallback: (element) => { console.log(JSON.stringify(element, null, 4)) },
+          path: <path d="m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" />,
+          viewBox: '0 0 40 40',
+          title: 'A title example',
+          className: 'class-example'
+        },
+        empty_object: {
+          clickCallback: (element) => { console.log(JSON.stringify(element, null, 4)) },
+          path: <path d="m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" />,
+          viewBox: '0 0 40 40',
+          title: 'A title example',
+          className: 'class-example'
+        },
+        function: {
+          clickCallback: (element) => { console.log(JSON.stringify(element, null, 4)) },
+          path: <path d="m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" />,
+          viewBox: '0 0 40 40',
+          title: 'A title example',
+          className: 'class-example'
+        },
+        undefined: {
+          clickCallback: (element) => { console.log(JSON.stringify(element, null, 4)) },
+          path: <path d="m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" />,
+          viewBox: '0 0 40 40',
+          title: 'A title example',
+          className: 'class-example'
+        },
+        null: {
+          clickCallback: (element) => { console.log(JSON.stringify(element, null, 4)) },
+          path: <path d="m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" />,
+          viewBox: '0 0 40 40',
+          title: 'A title example',
+          className: 'class-example'
+        },
+        nan: {
+          clickCallback: (element) => { console.log(JSON.stringify(element, null, 4)) },
+          path: <path d="m31.7 16.4q0-0.6-0.4-1l-2.1-2.1q-0.4-0.4-1-0.4t-1 0.4l-9.1 9.1-5-5q-0.5-0.4-1-0.4t-1 0.4l-2.1 2q-0.4 0.4-0.4 1 0 0.6 0.4 1l8.1 8.1q0.4 0.4 1 0.4 0.6 0 1-0.4l12.2-12.1q0.4-0.4 0.4-1z m5.6 3.6q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z" />,
+          viewBox: '0 0 40 40',
+          title: 'A title example',
+          className: 'class-example'
+        },
+      }}
+      onEdit={e => {
+        console.log('edit callback', e)
+        if (e.new_value == 'error') {
+          return false
+        }
+      }}
+      onDelete={e => {
+        console.log('delete callback', e)
+      }}
+      onAdd={e => {
+        console.log('add callback', e)
+        if (e.new_value == 'error') {
+          return false
+        }
+      }}
+      onSelect={e => {
+        console.log('select callback', e)
+        console.log(e.namespace)
+      }}
+      displayObjectSize={true}
+      name={'custom-buttons'}
+      enableClipboard={copy => {
+        console.log('you copied to clipboard!', copy)
+      }}
+      shouldCollapse={({ src, namespace, type }) => {
+        if (type === 'array' && src.indexOf('test') > -1) {
+          return true
+        } else if (namespace.indexOf('moment') > -1) {
+          return true
+        }
+        return false
+      }}
+      defaultValue=''
     />
   </div>,
   document.getElementById('app-container')
@@ -319,4 +485,36 @@ function getExampleArray () {
 
 function getExampleWithStringEscapeSequences () {
   return { '\\\n\t\r\f\\n': '\\\n\t\r\f\\n' }
+}
+
+function getExampleJson5 () {
+  return {
+    string: 'this is a test string',
+    'string-key-test': 'this is another test string',
+    integer: 42,
+    'integer-key-test': 27,
+    empty_array: [],
+    empty_object: {},
+    array: [1, 2, 3, 'test'],
+    float: -2.757,
+    undefined_var: undefined,
+    parent: {
+      sibling1: true,
+      sibling2: false,
+      sibling3: null,
+      sibling4: NaN,
+      isString: value => {
+        if (typeof value === 'string') {
+          return 'string'
+        } else {
+          return 'other'
+        }
+      }
+    },
+    string_number: '1234',
+    date: new Date(),
+    moment: Moment(),
+    regexp: /[0-9]/gi,
+    bigNumber: new BigNumber('0.0060254656709730629123'),
+  }
 }
