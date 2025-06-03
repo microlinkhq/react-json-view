@@ -26,7 +26,9 @@ const colorMap = theme => ({
     undefined: theme.base05,
     regexp: theme.base0A,
     background: theme.base02,
-    bigNumber: theme.base09
+    bigNumber: theme.base09,
+    map: theme.base0C,
+    set: theme.base0F
   },
   editVariable: {
     editIcon: theme.base0E,
@@ -208,6 +210,24 @@ const getDefaultThemeStyling = theme => {
       backgroundColor: colors.dataTypes.background,
       padding: constants.nullPadding,
       borderRadius: constants.nullBorderRadius
+    },
+    map: {
+      display: 'inline-block',
+      textTransform: 'capitalize',
+      color: colors.dataTypes.map,
+      fontSize: constants.mapSetFontSize,
+      padding: constants.mapSetPadding,
+      borderRadius: constants.mapSetBorderRadius,
+      backgroundColor: colors.dataTypes.background
+    },
+    set: {
+      display: 'inline-block',
+      textTransform: 'capitalize',
+      color: colors.dataTypes.set,
+      fontSize: constants.mapSetFontSize,
+      padding: constants.mapSetPadding,
+      borderRadius: constants.mapSetBorderRadius,
+      backgroundColor: colors.dataTypes.background
     },
     undefined: {
       display: 'inline-block',
