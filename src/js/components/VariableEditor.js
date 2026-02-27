@@ -72,7 +72,7 @@ class VariableEditor extends React.PureComponent {
         className='variable-row'
         key={variable.name}
       >
-        {type == 'array'
+        {type === 'array'
           ? (
               displayArrayKey
                 ? (
@@ -97,7 +97,9 @@ class VariableEditor extends React.PureComponent {
                 {!!quotesOnKeys && (
                   <span style={{ verticalAlign: 'top' }}>"</span>
                 )}
-                <span style={{ display: 'inline-block' }}>{escapeString(variable.name)}</span>
+                <span style={{ display: 'inline-block' }}>
+                  {escapeString(variable.name)}
+                </span>
                 {!!quotesOnKeys && (
                   <span style={{ verticalAlign: 'top' }}>"</span>
                 )}
@@ -114,11 +116,7 @@ class VariableEditor extends React.PureComponent {
         >
           {this.getValue(variable, editMode)}
         </div>
-        {showComma && !isLast && (
-          <span {...Theme(theme, 'comma')}>
-            ,
-          </span>
-        )}
+        {showComma && !isLast && <span {...Theme(theme, 'comma')}>,</span>}
         {enableClipboard
           ? (
             <CopyToClipboard
@@ -130,8 +128,8 @@ class VariableEditor extends React.PureComponent {
             />
             )
           : null}
-        {onEdit !== false && editMode == false ? this.getEditIcon() : null}
-        {onDelete !== false && editMode == false ? this.getRemoveIcon() : null}
+        {onEdit !== false && editMode === false ? this.getEditIcon() : null}
+        {onDelete !== false && editMode === false ? this.getRemoveIcon() : null}
       </div>
     )
   }
@@ -175,7 +173,10 @@ class VariableEditor extends React.PureComponent {
 
   prepopInput = variable => {
     if (this.props.onEdit !== false) {
-      const stringifiedValue = stringifyVariable(variable.value, this.props.bigNumber)
+      const stringifiedValue = stringifyVariable(
+        variable.value,
+        this.props.bigNumber
+      )
       const detected = parseInput(stringifiedValue, this.props.bigNumber)
       this.setState({
         editMode: true,
@@ -249,7 +250,9 @@ class VariableEditor extends React.PureComponent {
         return <JsonBigNumber value={variable.value} {...props} />
       default:
         // catch-all for types that weren't anticipated
-        return <div className='object-value'>{JSON.stringify(variable.value)}</div>
+        return (
+          <div className='object-value'>{JSON.stringify(variable.value)}</div>
+        )
     }
   }
 
@@ -330,16 +333,16 @@ class VariableEditor extends React.PureComponent {
     )
   }
 
-  submitEdit = submit_detected => {
+  submitEdit = submitDetected => {
     const { variable, namespace, rjvId, bigNumber: BigNumber } = this.props
     const { editValue, parsedInput } = this.state
-    let new_value = editValue
-    if (submit_detected && parsedInput.type) {
-      new_value = parsedInput.value
+    let newValue = editValue
+    if (submitDetected && parsedInput.type) {
+      newValue = parsedInput.value
       if (BigNumber && parsedInput.type === 'bigNumber') {
-        new_value = new BigNumber(new_value)
+        newValue = new BigNumber(newValue)
       }
-    } 
+    }
     this.setState({
       editMode: false
     })
@@ -350,15 +353,14 @@ class VariableEditor extends React.PureComponent {
         name: variable.name,
         namespace,
         existing_value: variable.value,
-        new_value,
+        new_value: newValue,
         variable_removed: false
       }
     })
   }
 
   showDetected = () => {
-    const { theme, variable, namespace, rjvId } = this.props
-    const { type, value } = this.state.parsedInput
+    const { theme } = this.props
     const detected = this.getDetectedInput()
     if (detected) {
       return (

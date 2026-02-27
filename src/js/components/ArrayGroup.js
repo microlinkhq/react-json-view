@@ -72,16 +72,15 @@ export default class extends React.PureComponent {
       theme,
       jsvRoot,
       namespace,
-      parent_type,
       ...rest
     } = this.props
 
-    let object_padding_left = 0
+    let objectPaddingLeft = 0
 
-    const array_group_padding_left = this.props.indentWidth * SINGLE_INDENT
+    const arrayGroupPaddingLeft = this.props.indentWidth * SINGLE_INDENT
 
     if (!jsvRoot) {
-      object_padding_left = this.props.indentWidth * SINGLE_INDENT
+      objectPaddingLeft = this.props.indentWidth * SINGLE_INDENT
     }
 
     const size = groupArraysAfterLength
@@ -91,7 +90,7 @@ export default class extends React.PureComponent {
       <div
         className='object-key-val'
         {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', {
-          paddingLeft: object_padding_left
+          paddingLeft: objectPaddingLeft
         })}
       >
         <ObjectName {...this.props} onKeyClick={this.handleKeySelect} />
@@ -105,7 +104,7 @@ export default class extends React.PureComponent {
             className='object-key-val array-group'
             {...Theme(theme, 'objectKeyVal', {
               marginLeft: 6,
-              paddingLeft: array_group_padding_left
+              paddingLeft: arrayGroupPaddingLeft
             })}
           >
             <span {...Theme(theme, 'brace-row')}>
@@ -150,7 +149,10 @@ export default class extends React.PureComponent {
                       {...Theme(theme, 'array-group-meta-data')}
                       className='array-group-meta-data'
                     >
-                      <span className='object-size' {...Theme(theme, 'object-size')}>
+                      <span
+                        className='object-size'
+                        {...Theme(theme, 'object-size')}
+                      >
                         {i * size}
                         {' - '}
                         {i * size + size > src.length

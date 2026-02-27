@@ -7,7 +7,7 @@ import JsonObject from './../../../../src/js/components/DataTypes/Object'
 import JsonString from './../../../../src/js/components/DataTypes/String'
 
 describe('<ArrayGroup />', function () {
-  const large_array = new Array(15).fill('test')
+  const largeArray = new Array(15).fill('test')
 
   it('ArrayGroup mount', function () {
     const wrapper = render(
@@ -15,7 +15,7 @@ describe('<ArrayGroup />', function () {
         groupArraysAfterLength={5}
         namespace='test'
         name='test'
-        src={large_array}
+        src={largeArray}
         theme='rjv-default'
         jsvRoot={false}
         indentWidth={4}
@@ -31,7 +31,7 @@ describe('<ArrayGroup />', function () {
         groupArraysAfterLength={5}
         namespace={['test']}
         name='test'
-        src={large_array}
+        src={largeArray}
         theme='rjv-default'
         jsvRoot={false}
         indentWidth={4}
@@ -57,7 +57,7 @@ describe('<ArrayGroup />', function () {
         groupArraysAfterLength={5}
         namespace={['test']}
         name='test'
-        src={large_array}
+        src={largeArray}
         theme='rjv-default'
         jsvRoot={false}
         indentWidth={4}
@@ -72,14 +72,14 @@ describe('<ArrayGroup />', function () {
   })
 
   it('ArrayGroup paginates groups accurately', function () {
-    const test_array = new Array(17).fill('test')
+    const testArray = new Array(17).fill('test')
 
     const wrapper = mount(
       <ArrayGroup
         groupArraysAfterLength={5}
         namespace={['test']}
         name='test'
-        src={test_array}
+        src={testArray}
         theme='rjv-default'
         jsvRoot={false}
         indentWidth={4}
@@ -101,7 +101,7 @@ describe('<ArrayGroup />', function () {
         groupArraysAfterLength={5}
         namespace={['test']}
         name='test'
-        src={large_array}
+        src={largeArray}
         theme='rjv-default'
         jsvRoot
         indentWidth={4}

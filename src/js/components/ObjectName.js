@@ -3,7 +3,7 @@ import Theme from './../themes/getStyle'
 
 export default function getObjectName (props) {
   const {
-    parent_type,
+    parent_type: parentType,
     namespace,
     quotesOnKeys,
     theme,
@@ -13,12 +13,12 @@ export default function getObjectName (props) {
     onKeyClick
   } = props
 
-  const display_name = props.name ? props.name : ''
+  const displayName = props.name ? props.name : ''
   const clickHandler = typeof onKeyClick === 'function' ? onKeyClick : null
 
   if (jsvRoot && (name === false || name === null)) {
     return <span />
-  } else if (parent_type == 'array') {
+  } else if (parentType === 'array') {
     return displayArrayKey
       ? (
         <span
@@ -26,7 +26,7 @@ export default function getObjectName (props) {
           key={namespace}
           onClick={clickHandler}
         >
-          <span className='array-key'>{display_name}</span>
+          <span className='array-key'>{displayName}</span>
           <span {...Theme(theme, 'colon')}>:</span>
         </span>
         )
@@ -35,10 +35,14 @@ export default function getObjectName (props) {
         )
   } else {
     return (
-      <span {...Theme(theme, 'object-name')} key={namespace} onClick={clickHandler}>
+      <span
+        {...Theme(theme, 'object-name')}
+        key={namespace}
+        onClick={clickHandler}
+      >
         <span className='object-key'>
           {quotesOnKeys && <span style={{ verticalAlign: 'top' }}>"</span>}
-          <span>{display_name}</span>
+          <span>{displayName}</span>
           {quotesOnKeys && <span style={{ verticalAlign: 'top' }}>"</span>}
         </span>
         <span {...Theme(theme, 'colon')}>:</span>
