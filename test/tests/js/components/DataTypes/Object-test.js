@@ -114,7 +114,7 @@ describe('<JsonObject />', function () {
         type='array'
       />
     )
-    expect(wrapper.find('.expanded-icon')).to.have.length(2)
+    expect(wrapper.find('.expanded-icon')).to.have.length(4)
     expect(wrapper.find('.collapsed-icon')).to.have.length(0)
   })
 
