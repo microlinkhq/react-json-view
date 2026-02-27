@@ -61,6 +61,34 @@ describe('<VariableEditor />', function () {
     expect(wrapper.find('.click-to-edit')).to.have.length(0)
   })
 
+  it('VariableEditor should call onSelect when clicking object key', function () {
+    let selected = null
+    const wrapper = shallow(
+      <VariableEditor
+        src={{ test: true }}
+        theme='rjv-default'
+        onSelect={data => {
+          selected = data
+        }}
+        keyModifier={() => false}
+        namespace={['root', 'parent']}
+        rjvId={rjvId}
+        variable={{
+          name: 'test',
+          value: 5,
+          type: 'int'
+        }}
+      />
+    )
+    wrapper.find('.object-key').simulate('click')
+    expect(selected).to.deep.equal({
+      name: 'test',
+      value: 5,
+      type: 'int',
+      namespace: ['parent']
+    })
+  })
+
   it('VariableEditor test textarea and cancel icon', function () {
     const wrapper = shallow(
       <VariableEditor

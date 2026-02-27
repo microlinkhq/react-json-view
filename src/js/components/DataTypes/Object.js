@@ -97,6 +97,28 @@ class RjvObject extends React.PureComponent {
     )
   }
 
+  handleKeySelect = () => {
+    const { name, namespace, onSelect, src } = this.props
+    const { object_type } = this.state
+
+    if (typeof onSelect !== 'function') {
+      return
+    }
+
+    const location = [...namespace]
+    location.shift()
+    if (location.length > 0) {
+      location.pop()
+    }
+
+    onSelect({
+      name,
+      value: src,
+      type: object_type,
+      namespace: location
+    })
+  }
+
   getObjectContent = (depth, src, props) => {
     return (
       <div className='pushed-content object-container'>
@@ -161,7 +183,7 @@ class RjvObject extends React.PureComponent {
           <div className='icon-container' {...Theme(theme, 'icon-container')}>
             <IconComponent {...{ theme, iconStyle }} />
           </div>
-          <ObjectName {...this.props} />
+          <ObjectName {...this.props} onKeyClick={this.handleKeySelect} />
           <span {...Theme(theme, 'brace')}>
             {object_type === 'array' ? '[' : '{'}
           </span>

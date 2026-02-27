@@ -110,4 +110,32 @@ describe('<ArrayGroup />', function () {
 
     expect(wrapper.find('.array-group').length).to.equal(3)
   })
+
+  it('ArrayGroup should call onSelect when clicking object key', function () {
+    const src = new Array(6).fill('test')
+    let selected = null
+    const wrapper = mount(
+      <ArrayGroup
+        groupArraysAfterLength={5}
+        namespace={['root', 'items']}
+        name='items'
+        src={src}
+        theme='rjv-default'
+        jsvRoot={false}
+        indentWidth={4}
+        onSelect={data => {
+          selected = data
+        }}
+      />
+    )
+
+    wrapper.find('.object-key').first().simulate('click')
+
+    expect(selected).to.deep.equal({
+      name: 'items',
+      value: src,
+      type: 'array',
+      namespace: []
+    })
+  })
 })

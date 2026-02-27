@@ -57,11 +57,11 @@ class VariableEditor extends React.PureComponent {
       onSelect,
       displayArrayKey,
       quotesOnKeys,
-      keyModifier,
       showComma,
       isLast
     } = this.props
     const { editMode } = this.state
+    const clickEnabled = onSelect !== false || onEdit !== false
     return (
       <div
         {...Theme(theme, 'objectKeyVal', {
@@ -92,6 +92,7 @@ class VariableEditor extends React.PureComponent {
                 {...Theme(theme, 'object-name')}
                 className='object-key'
                 key={variable.name + '_' + namespace}
+                onClick={clickEnabled ? this.handleSelect : null}
               >
                 {!!quotesOnKeys && (
                   <span style={{ verticalAlign: 'top' }}>"</span>
@@ -106,22 +107,7 @@ class VariableEditor extends React.PureComponent {
             )}
         <div
           className='variable-value'
-          onClick={
-            onSelect === false && onEdit === false
-              ? null
-              : e => {
-                const location = [...namespace]
-                if (keyModifier(e, 'edit') && onEdit !== false) {
-                  this.prepopInput(variable)
-                } else if (onSelect !== false) {
-                  location.shift()
-                  onSelect({
-                    ...variable,
-                    namespace: location
-                  })
-                }
-              }
-          }
+          onClick={clickEnabled ? this.handleSelect : null}
           {...Theme(theme, 'variableValue', {
             cursor: onSelect === false ? 'default' : 'pointer'
           })}
@@ -148,6 +134,21 @@ class VariableEditor extends React.PureComponent {
         {onDelete !== false && editMode == false ? this.getRemoveIcon() : null}
       </div>
     )
+  }
+
+  handleSelect = e => {
+    const { variable, namespace, onEdit, onSelect, keyModifier } = this.props
+
+    const location = [...namespace]
+    if (keyModifier(e, 'edit') && onEdit !== false) {
+      this.prepopInput(variable)
+    } else if (onSelect !== false) {
+      location.shift()
+      onSelect({
+        ...variable,
+        namespace: location
+      })
+    }
   }
 
   getEditIcon = () => {

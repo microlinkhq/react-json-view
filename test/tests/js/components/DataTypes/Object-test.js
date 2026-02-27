@@ -248,6 +248,65 @@ describe('<JsonObject />', function () {
     expect(wrapper.state('expanded')).to.equal(true)
   })
 
+  it('Object should call onSelect when clicking key for object values', function () {
+    const src = {}
+    let selected = null
+
+    const wrapper = mount(
+      <JsonObject
+        src={src}
+        theme='rjv-default'
+        namespace={['root', 'settings']}
+        name='settings'
+        rjvId={rjvId}
+        collapsed={false}
+        indentWidth={1}
+        onSelect={data => {
+          selected = data
+        }}
+      />
+    )
+
+    wrapper.find('.object-key').first().simulate('click')
+
+    expect(selected).to.deep.equal({
+      name: 'settings',
+      value: src,
+      type: 'object',
+      namespace: []
+    })
+  })
+
+  it('Object should call onSelect when clicking key for array values', function () {
+    const src = []
+    let selected = null
+
+    const wrapper = mount(
+      <JsonObject
+        src={src}
+        theme='rjv-default'
+        namespace={['root', 'items']}
+        name='items'
+        type='array'
+        rjvId={rjvId}
+        collapsed={false}
+        indentWidth={1}
+        onSelect={data => {
+          selected = data
+        }}
+      />
+    )
+
+    wrapper.find('.object-key').first().simulate('click')
+
+    expect(selected).to.deep.equal({
+      name: 'items',
+      value: src,
+      type: 'array',
+      namespace: []
+    })
+  })
+
   it('empty array should not be expanded', function () {
     let src = []
 

@@ -42,6 +42,27 @@ export default class extends React.PureComponent {
     return <CollapsedIcon {...{ theme, iconStyle }} />
   }
 
+  handleKeySelect = () => {
+    const { name, namespace, onSelect, src } = this.props
+
+    if (typeof onSelect !== 'function') {
+      return
+    }
+
+    const location = [...namespace]
+    location.shift()
+    if (location.length > 0) {
+      location.pop()
+    }
+
+    onSelect({
+      name,
+      value: src,
+      type: 'array',
+      namespace: location
+    })
+  }
+
   render () {
     const {
       src,
@@ -73,7 +94,7 @@ export default class extends React.PureComponent {
           paddingLeft: object_padding_left
         })}
       >
-        <ObjectName {...this.props} />
+        <ObjectName {...this.props} onKeyClick={this.handleKeySelect} />
 
         <span>
           <VariableMeta size={src.length} {...this.props} />
