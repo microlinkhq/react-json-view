@@ -24,6 +24,7 @@ class Demo extends React.PureComponent {
     onAdd: true,
     onEdit: true,
     onDelete: true,
+    onSelect: true,
     displayObjectSize: true,
     enableClipboard: true,
     indentWidth: 4,
@@ -129,6 +130,7 @@ class Demo extends React.PureComponent {
       onAdd,
       onEdit,
       onDelete,
+      onSelect,
       displayObjectSize,
       enableClipboard,
       theme,
@@ -210,6 +212,13 @@ class Demo extends React.PureComponent {
                 }
                 : false
             }
+            onSelect={
+              onSelect
+                ? e => {
+                  console.log(e)
+                }
+                : false
+            }
             displayObjectSize={displayObjectSize}
             enableClipboard={enableClipboard}
             indentWidth={indentWidth}
@@ -252,6 +261,10 @@ class Demo extends React.PureComponent {
             <div className='rjv-input'>
               <div className='rjv-label'>Display Object Size:</div>
               {this.getObjectSizeInput(displayObjectSize)}
+            </div>
+            <div className='rjv-input'>
+              <div className='rjv-label'>Enable Select:</div>
+              {this.getSelectInput(onSelect)}
             </div>
             <div className='rjv-input'>
               <div className='rjv-label'>Indent Width:</div>
@@ -382,6 +395,22 @@ class Demo extends React.PureComponent {
         ]}
         onChange={val => {
           this.set('onDelete', val)
+        }}
+      />
+    )
+  }
+
+  getSelectInput = onSelect => {
+    return (
+      <ReactSelect
+        name='enable-select'
+        value={onSelect}
+        options={[
+          { value: true, label: 'true' },
+          { value: false, label: 'false' }
+        ]}
+        onChange={val => {
+          this.set('onSelect', val)
         }}
       />
     )
