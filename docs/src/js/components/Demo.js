@@ -327,8 +327,8 @@ class Demo extends React.PureComponent {
       <div style={{ marginTop: '20px', fontStyle: 'italic' }}>
         Keyboard Shortcuts
         <ul>
-          {notes.map(note => {
-            return <li>{note}</li>
+          {notes.map((note, index) => {
+            return <li key={index}>{note}</li>
           })}
         </ul>
       </div>
