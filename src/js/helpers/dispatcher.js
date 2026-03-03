@@ -1,11 +1,11 @@
 class Dispatcher {
   handler = () => {}
 
-  register(handler) {
+  register (handler) {
     this.handler = handler
   }
 
-  dispatch(data) {
+  dispatch (data) {
     this.handler?.(data)
   }
 }

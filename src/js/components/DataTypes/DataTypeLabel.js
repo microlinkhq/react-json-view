@@ -5,11 +5,11 @@ import Theme from './../../themes/getStyle'
 
 export default class extends React.PureComponent {
   render () {
-    const { rjvId, type_name, displayDataTypes, theme } = this.props
+    const { typeName, displayDataTypes, theme } = this.props
     if (displayDataTypes) {
       return (
         <span className='data-type-label' {...Theme(theme, 'data-type-label')}>
-          {type_name}
+          {typeName}
         </span>
       )
     }

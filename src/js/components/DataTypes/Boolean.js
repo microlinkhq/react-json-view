@@ -6,12 +6,12 @@ import Theme from './../../themes/getStyle'
 
 export default class extends React.PureComponent {
   render () {
-    const type_name = 'bool'
+    const typeName = 'bool'
     const { props } = this
 
     return (
       <div {...Theme(props.theme, 'boolean')}>
-        <DataTypeLabel type_name={type_name} {...props} />
+        <DataTypeLabel typeName={typeName} {...props} />
         {props.value ? 'true' : 'false'}
       </div>
     )

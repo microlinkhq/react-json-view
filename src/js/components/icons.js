@@ -1,7 +1,5 @@
 import React from 'react'
 
-const DEFAULT_WIDTH = 24
-const DEFAULT_HEIGHT = 24
 const DEFAULT_COLOR = '#000000'
 
 export class CircleMinus extends React.PureComponent {

@@ -20,7 +20,7 @@ export default class extends React.PureComponent {
     }
   }
 
-  toggleCollapsed = () => {
+  handleToggleCollapsed = () => {
     this.setState(
       {
         collapsed: !this.state.collapsed
@@ -38,17 +38,17 @@ export default class extends React.PureComponent {
   }
 
   render () {
-    const type_name = 'function'
+    const typeName = 'function'
     const { props } = this
     const { collapsed } = this.state
 
     return (
       <div {...Theme(props.theme, 'function')}>
-        <DataTypeLabel type_name={type_name} {...props} />
+        <DataTypeLabel typeName={typeName} {...props} />
         <span
           {...Theme(props.theme, 'function-value')}
           className='rjv-function-container'
-          onClick={this.toggleCollapsed}
+          onClick={this.handleToggleCollapsed}
         >
           {this.getFunctionDisplay(collapsed)}
         </span>

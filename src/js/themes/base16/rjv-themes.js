@@ -1,4 +1,4 @@
-export const rjv_default = {
+export const rjvDefault = {
   scheme: 'rjv-default',
   author: 'mac gainor',
   // transparent main background
@@ -20,7 +20,7 @@ export const rjv_default = {
   base0F: '#268bd2'
 }
 
-export const rjv_grey = {
+export const rjvGrey = {
   scheme: 'rjv-grey',
   author: 'mac gainor',
   base00: 'rgba(1, 1, 1, 0)',

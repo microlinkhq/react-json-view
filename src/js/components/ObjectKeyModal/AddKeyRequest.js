@@ -3,9 +3,6 @@ import dispatcher from './../../helpers/dispatcher'
 import ObjectAttributes from './../../stores/ObjectAttributes'
 import ObjectKeyModal from './ObjectKeyModal'
 
-// global theme
-import Theme from './../../themes/getStyle'
-
 // this input appears when adding a new value to an object
 export default class extends React.PureComponent {
   render () {
@@ -27,7 +24,7 @@ export default class extends React.PureComponent {
     const { rjvId } = this.props
     const request = ObjectAttributes.get(rjvId, 'action', 'new-key-request')
     return (
-      input != '' && Object.keys(request.existing_value).indexOf(input) === -1
+      input !== '' && Object.keys(request.existing_value).indexOf(input) === -1
     )
   }
 

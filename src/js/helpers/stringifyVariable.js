@@ -2,38 +2,38 @@ import { toType } from './util'
 
 export default (value, bigNumber) => {
   const type = toType(value, bigNumber)
-  let string_value
+  let stringValue
   switch (type) {
     case 'undefined': {
-      string_value = 'undefined'
+      stringValue = 'undefined'
       break
     }
     case 'nan':
-      string_value = 'NaN'
+      stringValue = 'NaN'
       break
     case 'string':
-      string_value = value
+      stringValue = value
       break
     case 'bigNumber':
-      string_value = value.toString()
+      stringValue = value.toString()
       break
     case 'date':
-      string_value = value.toString()
+      stringValue = value.toString()
       break
     case 'function':
-      string_value = value.toString()
+      stringValue = value.toString()
       break
     case 'regexp':
-      string_value = value.toString()
+      stringValue = value.toString()
       break
     default: {
       try {
-        string_value = JSON.stringify(value, null, '  ')
+        stringValue = JSON.stringify(value, null, '  ')
       } catch (e) {
-        string_value = ''
+        stringValue = ''
       }
     }
   }
 
-  return string_value
+  return stringValue
 }

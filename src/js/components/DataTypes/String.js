@@ -21,7 +21,7 @@ export default class extends React.PureComponent {
     }
   }
 
-  toggleCollapsed = () => {
+  handleToggleCollapsed = () => {
     this.setState(
       {
         collapsed: !this.state.collapsed
@@ -38,7 +38,7 @@ export default class extends React.PureComponent {
   }
 
   render () {
-    const type_name = 'string'
+    const typeName = 'string'
     const { collapsed } = this.state
     const { props } = this
     const { collapseStringsAfterLength, theme, escapeStrings } = props
@@ -64,8 +64,12 @@ export default class extends React.PureComponent {
 
     return (
       <div {...Theme(theme, 'string')}>
-        <DataTypeLabel type_name={type_name} {...props} />
-        <span className='string-value' {...style} onClick={this.toggleCollapsed}>
+        <DataTypeLabel typeName={typeName} {...props} />
+        <span
+          className='string-value'
+          {...style}
+          onClick={this.handleToggleCollapsed}
+        >
           "{value}"
         </span>
       </div>
