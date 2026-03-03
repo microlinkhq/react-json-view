@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow, render, mount } from 'enzyme'
+import { mount } from 'enzyme'
 import { expect } from 'chai'
 
 import AddKeyRequest from './../../../../../src/js/components/ObjectKeyModal/AddKeyRequest'

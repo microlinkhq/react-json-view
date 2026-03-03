@@ -1,7 +1,10 @@
-import React from 'react'
 import { expect } from 'chai'
 
-import { toType, isTheme, escapeString } from './../../../../src/js/helpers/util'
+import {
+  toType,
+  isTheme,
+  escapeString
+} from './../../../../src/js/helpers/util'
 
 describe('toType', function () {
   it('toType object', function () {
@@ -30,7 +33,7 @@ describe('toType', function () {
   })
 
   it('toType function', function () {
-    const test = () => { }
+    const test = () => {}
     expect(toType(test)).to.equal('function')
   })
 

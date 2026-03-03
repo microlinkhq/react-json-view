@@ -10,7 +10,7 @@ describe('<DataTypeLabel />', function () {
   it('DataTypeLabel should exist when displayDataTypes is true', function () {
     const wrapper = shallow(
       <DataTypeLabel
-        type_name='test'
+        typeName='test'
         rjvId={rjvId}
         displayDataTypes
         theme='rjv-default'
@@ -22,7 +22,7 @@ describe('<DataTypeLabel />', function () {
   it('DataTypeLabel should not exist when displayDataTypes is false', function () {
     const wrapper = shallow(
       <DataTypeLabel
-        type_name='test'
+        typeName='test'
         rjvId={rjvId}
         displayDataTypes={false}
         theme='rjv-default'

@@ -11,8 +11,6 @@ global.window = window
 global.document = window.document
 
 describe('<Index />', function () {
-  const rjvId = 1
-
   it('check data type labels from index', function () {
     const wrapper = render(
       <Index
