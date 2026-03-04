@@ -4,6 +4,7 @@
   "homepage": "https://github.com/microlinkhq/react-json-view",
   "version": "1.27.1",
   "main": "dist/main.js",
+  "types": "index.d.ts",
   "author": {
     "name": "Mac Gainor"
   },
