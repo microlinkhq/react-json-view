@@ -1,4 +1,4 @@
-import { rjv_default, rjv_grey } from './base16/rjv-themes'
+import { rjvDefault, rjvGrey } from './base16/rjv-themes'
 import constants from './styleConstants'
 import { createStyling } from 'react-base16-styling'
 
@@ -90,7 +90,7 @@ const getDefaultThemeStyling = theme => {
       color: colors.keyColor,
       verticalAlign: 'top'
     },
-    objectKeyVal: (component, variable_style) => {
+    objectKeyVal: (component, variableStyle) => {
       return {
         style: {
           paddingTop: constants.keyValPaddingTop,
@@ -98,10 +98,10 @@ const getDefaultThemeStyling = theme => {
           paddingBottom: constants.keyValPaddingBottom,
           borderLeft: constants.keyValBorderLeft + ' ' + colors.objectBorder,
           ':hover': {
-            paddingLeft: variable_style.paddingLeft - 1 + 'px',
+            paddingLeft: variableStyle.paddingLeft - 1 + 'px',
             borderLeft: constants.keyValBorderHover + ' ' + colors.objectBorder
           },
-          ...variable_style
+          ...variableStyle
         }
       }
     },
@@ -111,13 +111,13 @@ const getDefaultThemeStyling = theme => {
     'pushed-content': {
       marginLeft: constants.pushedContentMarginLeft
     },
-    variableValue: (component, variable_style) => {
+    variableValue: (component, variableStyle) => {
       return {
         style: {
           display: 'inline-block',
           paddingRight: constants.variableValuePaddingRight,
           position: 'relative',
-          ...variable_style
+          ...variableStyle
         }
       }
     },
@@ -398,12 +398,12 @@ const getDefaultThemeStyling = theme => {
 }
 
 const getStyle = theme => {
-  let rjv_theme = rjv_default
+  let rjvTheme = rjvDefault
   if (theme === false || theme === 'none') {
-    rjv_theme = rjv_grey
+    rjvTheme = rjvGrey
   }
 
-  return createStyling(getDefaultThemeStyling, { defaultBase16: rjv_theme })(
+  return createStyling(getDefaultThemeStyling, { defaultBase16: rjvTheme })(
     theme
   )
 }

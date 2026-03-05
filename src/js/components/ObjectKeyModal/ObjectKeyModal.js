@@ -25,7 +25,7 @@ export default class extends React.PureComponent {
       <div
         className='key-modal-request'
         {...Theme(theme, 'key-modal-request')}
-        onClick={this.closeModal}
+        onClick={this.handleCloseModal}
       >
         <div
           {...Theme(theme, 'key-modal')}
@@ -49,9 +49,9 @@ export default class extends React.PureComponent {
               }}
               onKeyPress={e => {
                 if (valid && e.key === 'Enter') {
-                  this.submit()
+                  this.handleSubmit()
                 } else if (e.key === 'Escape') {
-                  this.closeModal()
+                  this.handleCloseModal()
                 }
               }}
             />
@@ -60,7 +60,7 @@ export default class extends React.PureComponent {
                 <CheckCircle
                   {...Theme(theme, 'key-modal-submit')}
                   className='key-modal-submit'
-                  onClick={e => this.submit()}
+                  onClick={this.handleSubmit}
                 />
                 )
               : null}
@@ -82,14 +82,14 @@ export default class extends React.PureComponent {
     )
   }
 
-  closeModal = () => {
+  handleCloseModal = () => {
     dispatcher.dispatch({
       rjvId: this.props.rjvId,
       name: 'RESET'
     })
   }
 
-  submit = () => {
+  handleSubmit = () => {
     this.props.submit(this.state.input)
   }
 }

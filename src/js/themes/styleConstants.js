@@ -96,4 +96,4 @@ export default {
   commaColor: '#666',
   commaFontSize: '12px',
   commaMarginRight: '4px'
-};
+}

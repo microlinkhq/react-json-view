@@ -4,7 +4,6 @@ import ReactJson from './../../../../src/js/index'
 
 import Code from './../helpers/Code'
 import './../../style/scss/rjv-demo.scss'
-import 'react-select/dist/react-select.css'
 
 // index entrypoint component
 class Demo extends React.PureComponent {
@@ -24,6 +23,7 @@ class Demo extends React.PureComponent {
     onAdd: true,
     onEdit: true,
     onDelete: true,
+    onSelect: true,
     displayObjectSize: true,
     enableClipboard: true,
     indentWidth: 4,
@@ -88,7 +88,7 @@ class Demo extends React.PureComponent {
 
   componentDidMount () {
     this.updateStyles()
-    this.observer = new MutationObserver(this.updateStyles)
+    this.observer = new window.MutationObserver(this.updateStyles)
     this.observer.observe(document.querySelector('.react-json-view'), {
       attributes: true,
       childList: true,
@@ -129,6 +129,7 @@ class Demo extends React.PureComponent {
       onAdd,
       onEdit,
       onDelete,
+      onSelect,
       displayObjectSize,
       enableClipboard,
       theme,
@@ -156,21 +157,6 @@ class Demo extends React.PureComponent {
 
           .react-json-view {
             border: 1px solid ${this.state.siteTheme.borderColor};
-          }
-
-          .Select-control,
-          .Select.is-open>.Select-control,
-          .Select-option,
-          .Select-option.is-selected,
-          .Select-option.is-focused {
-            background-color: ${this.state.siteTheme.bgColor};
-            color: ${this.state.siteTheme.color};
-          }
-          .Select-option.is-focused {
-            opacity: 0.8;
-          }
-          .Select.has-value.Select--single>.Select-control .Select-value .Select-value-label, .Select.has-value.is-pseudo-focused.Select--single>.Select-control .Select-value .Select-value-label {
-            color: ${this.state.siteTheme.color};
           }
         `}
           </style>
@@ -207,6 +193,13 @@ class Demo extends React.PureComponent {
                 ? e => {
                   console.log(e)
                   this.setState({ src: e.updated_src })
+                }
+                : false
+            }
+            onSelect={
+              onSelect
+                ? e => {
+                  console.log(e)
                 }
                 : false
             }
@@ -254,6 +247,10 @@ class Demo extends React.PureComponent {
               {this.getObjectSizeInput(displayObjectSize)}
             </div>
             <div className='rjv-input'>
+              <div className='rjv-label'>Enable Select:</div>
+              {this.getSelectInput(onSelect)}
+            </div>
+            <div className='rjv-input'>
               <div className='rjv-label'>Indent Width:</div>
               {this.getIndentWidthInput(indentWidth)}
             </div>
@@ -273,9 +270,9 @@ class Demo extends React.PureComponent {
     )
   }
 
-  getNotes = (on_edit_enabled, on_add_enabled) => {
+  getNotes = (onEditEnabled, onAddEnabled) => {
     const notes = []
-    if (on_edit_enabled) {
+    if (onEditEnabled) {
       notes.push(
         <span>
           To edit a value, try <Code>ctrl/cmd + click</Code> enter edit mode
@@ -293,7 +290,7 @@ class Demo extends React.PureComponent {
         </span>
       )
     }
-    if (on_add_enabled) {
+    if (onAddEnabled) {
       notes.push(
         <span>
           When adding a new key, try <Code>Enter</Code> to submit
@@ -314,8 +311,8 @@ class Demo extends React.PureComponent {
       <div style={{ marginTop: '20px', fontStyle: 'italic' }}>
         Keyboard Shortcuts
         <ul>
-          {notes.map(note => {
-            return <li>{note}</li>
+          {notes.map((note, index) => {
+            return <li key={index}>{note}</li>
           })}
         </ul>
       </div>
@@ -323,15 +320,17 @@ class Demo extends React.PureComponent {
   }
 
   getIconStyleInput = iconStyle => {
+    const options = [
+      { value: 'circle', label: 'circle' },
+      { value: 'square', label: 'square' },
+      { value: 'triangle', label: 'triangle' }
+    ]
     return (
       <ReactSelect
         name='icon-style'
-        value={iconStyle}
-        options={[
-          { value: 'circle', label: 'circle' },
-          { value: 'square', label: 'square' },
-          { value: 'triangle', label: 'triangle' }
-        ]}
+        value={options.find(opt => opt.value === iconStyle)}
+        options={options}
+        styles={this.getSelectStyles()}
         onChange={val => {
           this.set('iconStyle', val)
         }}
@@ -340,14 +339,16 @@ class Demo extends React.PureComponent {
   }
 
   getEditInput = onEdit => {
+    const options = [
+      { value: true, label: 'true' },
+      { value: false, label: 'false' }
+    ]
     return (
       <ReactSelect
         name='enable-edit'
-        value={onEdit}
-        options={[
-          { value: true, label: 'true' },
-          { value: false, label: 'false' }
-        ]}
+        value={options.find(opt => opt.value === onEdit)}
+        options={options}
+        styles={this.getSelectStyles()}
         onChange={val => {
           this.set('onEdit', val)
         }}
@@ -356,14 +357,16 @@ class Demo extends React.PureComponent {
   }
 
   getAddInput = onAdd => {
+    const options = [
+      { value: true, label: 'true' },
+      { value: false, label: 'false' }
+    ]
     return (
       <ReactSelect
         name='enable-add'
-        value={onAdd}
-        options={[
-          { value: true, label: 'true' },
-          { value: false, label: 'false' }
-        ]}
+        value={options.find(opt => opt.value === onAdd)}
+        options={options}
+        styles={this.getSelectStyles()}
         onChange={val => {
           this.set('onAdd', val)
         }}
@@ -372,14 +375,16 @@ class Demo extends React.PureComponent {
   }
 
   getDeleteInput = onDelete => {
+    const options = [
+      { value: true, label: 'true' },
+      { value: false, label: 'false' }
+    ]
     return (
       <ReactSelect
         name='enable-delete'
-        value={onDelete}
-        options={[
-          { value: true, label: 'true' },
-          { value: false, label: 'false' }
-        ]}
+        value={options.find(opt => opt.value === onDelete)}
+        options={options}
+        styles={this.getSelectStyles()}
         onChange={val => {
           this.set('onDelete', val)
         }}
@@ -387,15 +392,35 @@ class Demo extends React.PureComponent {
     )
   }
 
+  getSelectInput = onSelect => {
+    const options = [
+      { value: true, label: 'true' },
+      { value: false, label: 'false' }
+    ]
+    return (
+      <ReactSelect
+        name='enable-select'
+        value={options.find(opt => opt.value === onSelect)}
+        options={options}
+        styles={this.getSelectStyles()}
+        onChange={val => {
+          this.set('onSelect', val)
+        }}
+      />
+    )
+  }
+
   getEnableClipboardInput = enableClipboard => {
+    const options = [
+      { value: true, label: 'true' },
+      { value: false, label: 'false' }
+    ]
     return (
       <ReactSelect
         name='enable-clipboard'
-        value={enableClipboard}
-        options={[
-          { value: true, label: 'true' },
-          { value: false, label: 'false' }
-        ]}
+        value={options.find(opt => opt.value === enableClipboard)}
+        options={options}
+        styles={this.getSelectStyles()}
         onChange={val => {
           this.set('enableClipboard', val)
         }}
@@ -404,14 +429,16 @@ class Demo extends React.PureComponent {
   }
 
   getObjectSizeInput = displayObjectSize => {
+    const options = [
+      { value: true, label: 'true' },
+      { value: false, label: 'false' }
+    ]
     return (
       <ReactSelect
         name='display-object-size'
-        value={displayObjectSize}
-        options={[
-          { value: true, label: 'true' },
-          { value: false, label: 'false' }
-        ]}
+        value={options.find(opt => opt.value === displayObjectSize)}
+        options={options}
+        styles={this.getSelectStyles()}
         onChange={val => {
           this.set('displayObjectSize', val)
         }}
@@ -420,14 +447,16 @@ class Demo extends React.PureComponent {
   }
 
   getDataTypesInput = displayDataTypes => {
+    const options = [
+      { value: true, label: 'true' },
+      { value: false, label: 'false' }
+    ]
     return (
       <ReactSelect
         name='display-data-types'
-        value={displayDataTypes}
-        options={[
-          { value: true, label: 'true' },
-          { value: false, label: 'false' }
-        ]}
+        value={options.find(opt => opt.value === displayDataTypes)}
+        options={options}
+        styles={this.getSelectStyles()}
         onChange={val => {
           this.set('displayDataTypes', val)
         }}
@@ -436,17 +465,19 @@ class Demo extends React.PureComponent {
   }
 
   getCollapsedStringsInput = collapseStringsAfter => {
+    const options = [
+      { value: false, label: 'false' },
+      { value: 5, label: 5 },
+      { value: 10, label: 10 },
+      { value: 15, label: 15 },
+      { value: 20, label: 20 }
+    ]
     return (
       <ReactSelect
         name='collapse-strings'
-        value={collapseStringsAfter}
-        options={[
-          { value: false, label: 'false' },
-          { value: 5, label: 5 },
-          { value: 10, label: 10 },
-          { value: 15, label: 15 },
-          { value: 20, label: 20 }
-        ]}
+        value={options.find(opt => opt.value === collapseStringsAfter)}
+        options={options}
+        styles={this.getSelectStyles()}
         onChange={val => {
           this.set('collapseStringsAfter', val)
         }}
@@ -455,16 +486,18 @@ class Demo extends React.PureComponent {
   }
 
   getCollapsedInput = collapsed => {
+    const options = [
+      { value: true, label: 'true' },
+      { value: false, label: 'false' },
+      { value: 1, label: 1 },
+      { value: 2, label: 2 }
+    ]
     return (
       <ReactSelect
         name='collapsed'
-        value={collapsed}
-        options={[
-          { value: true, label: 'true' },
-          { value: false, label: 'false' },
-          { value: 1, label: 1 },
-          { value: 2, label: 2 }
-        ]}
+        value={options.find(opt => opt.value === collapsed)}
+        options={options}
+        styles={this.getSelectStyles()}
         onChange={val => {
           this.set('collapsed', val)
         }}
@@ -473,23 +506,25 @@ class Demo extends React.PureComponent {
   }
 
   getIndentWidthInput = indentWidth => {
+    const options = [
+      { value: 0, label: 0 },
+      { value: 1, label: 1 },
+      { value: 2, label: 2 },
+      { value: 3, label: 3 },
+      { value: 4, label: 4 },
+      { value: 5, label: 5 },
+      { value: 6, label: 6 },
+      { value: 7, label: 7 },
+      { value: 8, label: 8 },
+      { value: 9, label: 9 },
+      { value: 10, label: 10 }
+    ]
     return (
       <ReactSelect
         name='indent-width'
-        value={indentWidth}
-        options={[
-          { value: 0, label: 0 },
-          { value: 1, label: 1 },
-          { value: 2, label: 2 },
-          { value: 3, label: 3 },
-          { value: 4, label: 4 },
-          { value: 5, label: 5 },
-          { value: 6, label: 6 },
-          { value: 7, label: 7 },
-          { value: 8, label: 8 },
-          { value: 9, label: 9 },
-          { value: 10, label: 10 }
-        ]}
+        value={options.find(opt => opt.value === indentWidth)}
+        options={options}
+        styles={this.getSelectStyles()}
         onChange={val => {
           this.set('indentWidth', val)
         }}
@@ -498,63 +533,95 @@ class Demo extends React.PureComponent {
   }
 
   getThemeInput = theme => {
+    const options = [
+      { value: 'apathy', label: 'apathy' },
+      { value: 'apathy:inverted', label: 'apathy:inverted' },
+      { value: 'ashes', label: 'ashes' },
+      { value: 'bespin', label: 'bespin' },
+      { value: 'brewer', label: 'brewer' },
+      { value: 'bright:inverted', label: 'bright:inverted' },
+      { value: 'bright', label: 'bright' },
+      { value: 'chalk', label: 'chalk' },
+      { value: 'codeschool', label: 'codeschool' },
+      { value: 'colors', label: 'colors' },
+      { value: 'eighties', label: 'eighties' },
+      { value: 'embers', label: 'embers' },
+      { value: 'flat', label: 'flat' },
+      { value: 'google', label: 'google' },
+      { value: 'grayscale', label: 'grayscale' },
+      { value: 'grayscale:inverted', label: 'grayscale:inverted' },
+      { value: 'greenscreen', label: 'greenscreen' },
+      { value: 'harmonic', label: 'harmonic' },
+      { value: 'hopscotch', label: 'hopscotch' },
+      { value: 'isotope', label: 'isotope' },
+      { value: 'marrakesh', label: 'marrakesh' },
+      { value: 'mocha', label: 'mocha' },
+      { value: 'monokai', label: 'monokai' },
+      { value: 'ocean', label: 'ocean' },
+      { value: 'paraiso', label: 'paraiso' },
+      { value: 'pop', label: 'pop' },
+      { value: 'railscasts', label: 'railscasts' },
+      { value: 'rjv-default', label: 'rjv-default' },
+      { value: 'shapeshifter', label: 'shapeshifter' },
+      { value: 'shapeshifter:inverted', label: 'shapeshifter:inverted' },
+      { value: 'solarized', label: 'solarized' },
+      { value: 'summerfruit', label: 'summerfruit' },
+      { value: 'summerfruit:inverted', label: 'summerfruit:inverted' },
+      { value: 'threezerotwofour', label: 'threezerotwofour' },
+      { value: 'tomorrow', label: 'tomorrow' },
+      { value: 'tube', label: 'tube' },
+      { value: 'twilight', label: 'twilight' }
+    ]
     return (
       <ReactSelect
         name='theme-select'
-        value={theme}
-        options={[
-          { value: 'apathy', label: 'apathy' },
-          { value: 'apathy:inverted', label: 'apathy:inverted' },
-          { value: 'ashes', label: 'ashes' },
-          { value: 'bespin', label: 'bespin' },
-          { value: 'brewer', label: 'brewer' },
-          { value: 'bright:inverted', label: 'bright:inverted' },
-          { value: 'bright', label: 'bright' },
-          { value: 'chalk', label: 'chalk' },
-          { value: 'codeschool', label: 'codeschool' },
-          { value: 'colors', label: 'colors' },
-          { value: 'eighties', label: 'eighties' },
-          { value: 'embers', label: 'embers' },
-          { value: 'flat', label: 'flat' },
-          { value: 'google', label: 'google' },
-          { value: 'grayscale', label: 'grayscale' },
-          {
-            value: 'grayscale:inverted',
-            label: 'grayscale:inverted'
-          },
-          { value: 'greenscreen', label: 'greenscreen' },
-          { value: 'harmonic', label: 'harmonic' },
-          { value: 'hopscotch', label: 'hopscotch' },
-          { value: 'isotope', label: 'isotope' },
-          { value: 'marrakesh', label: 'marrakesh' },
-          { value: 'mocha', label: 'mocha' },
-          { value: 'monokai', label: 'monokai' },
-          { value: 'ocean', label: 'ocean' },
-          { value: 'paraiso', label: 'paraiso' },
-          { value: 'pop', label: 'pop' },
-          { value: 'railscasts', label: 'railscasts' },
-          { value: 'rjv-default', label: 'rjv-default' },
-          { value: 'shapeshifter', label: 'shapeshifter' },
-          {
-            value: 'shapeshifter:inverted',
-            label: 'shapeshifter:inverted'
-          },
-          { value: 'solarized', label: 'solarized' },
-          { value: 'summerfruit', label: 'summerfruit' },
-          {
-            value: 'summerfruit:inverted',
-            label: 'summerfruit:inverted'
-          },
-          { value: 'threezerotwofour', label: 'threezerotwofour' },
-          { value: 'tomorrow', label: 'tomorrow' },
-          { value: 'tube', label: 'tube' },
-          { value: 'twilight', label: 'twilight' }
-        ]}
+        value={options.find(opt => opt.value === theme)}
+        options={options}
+        styles={this.getSelectStyles()}
         onChange={val => {
           this.set('theme', val)
         }}
       />
     )
+  }
+
+  getSelectStyles = () => {
+    const { siteTheme } = this.state
+    if (!siteTheme) return {}
+    return {
+      control: base => ({
+        ...base,
+        backgroundColor: siteTheme.bgColor,
+        borderColor: siteTheme.borderColor,
+        color: siteTheme.color
+      }),
+      singleValue: base => ({
+        ...base,
+        color: siteTheme.color
+      }),
+      option: (base, { isFocused }) => ({
+        ...base,
+        backgroundColor: siteTheme.bgColor,
+        color: siteTheme.color,
+        opacity: isFocused ? 0.8 : 1
+      }),
+      menu: base => ({
+        ...base,
+        backgroundColor: siteTheme.bgColor
+      }),
+      input: base => ({
+        ...base,
+        color: siteTheme.color
+      }),
+      indicatorSeparator: base => ({
+        ...base,
+        backgroundColor: siteTheme.borderColor
+      }),
+      dropdownIndicator: base => ({
+        ...base,
+        color: siteTheme.color
+      })
+    }
   }
 
   set = (field, value) => {

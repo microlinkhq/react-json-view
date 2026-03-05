@@ -81,7 +81,7 @@ class RjvObject extends React.PureComponent {
     return null
   }
 
-  toggleCollapsed = () => {
+  handleToggleCollapsed = () => {
     this.setState(
       {
         expanded: !this.state.expanded
@@ -95,6 +95,28 @@ class RjvObject extends React.PureComponent {
         )
       }
     )
+  }
+
+  handleKeySelect = () => {
+    const { name, namespace, onSelect, src } = this.props
+    const { object_type: objectType } = this.state
+
+    if (typeof onSelect !== 'function') {
+      return
+    }
+
+    const location = [...namespace]
+    location.shift()
+    if (location.length > 0) {
+      location.pop()
+    }
+
+    onSelect({
+      name,
+      value: src,
+      type: objectType,
+      namespace: location
+    })
   }
 
   getObjectContent = (depth, src, props) => {
@@ -121,7 +143,7 @@ class RjvObject extends React.PureComponent {
         <div
           {...Theme(this.props.theme, 'ellipsis')}
           className='node-ellipsis'
-          onClick={this.toggleCollapsed}
+          onClick={this.handleToggleCollapsed}
         >
           ...
         </div>
@@ -130,19 +152,18 @@ class RjvObject extends React.PureComponent {
   }
 
   getObjectMetaData = src => {
-    const { rjvId, theme } = this.props
     const { size, hovered } = this.state
     return <VariableMeta rowHovered={hovered} size={size} {...this.props} />
   }
 
-  getBraceStart (object_type, expanded) {
-    const { src, theme, iconStyle, parent_type } = this.props
+  getBraceStart (objectType, expanded) {
+    const { theme, iconStyle, parent_type: parentType } = this.props
 
-    if (parent_type === 'array_group') {
+    if (parentType === 'array_group') {
       return (
         <span>
           <span {...Theme(theme, 'brace')}>
-            {object_type === 'array' ? '[' : '{'}
+            {objectType === 'array' ? '[' : '{'}
           </span>
         </span>
       )
@@ -153,17 +174,15 @@ class RjvObject extends React.PureComponent {
     return (
       <span>
         <span
-          onClick={e => {
-            this.toggleCollapsed()
-          }}
+          onClick={this.handleToggleCollapsed}
           {...Theme(theme, 'brace-row')}
         >
           <div className='icon-container' {...Theme(theme, 'icon-container')}>
             <IconComponent {...{ theme, iconStyle }} />
           </div>
-          <ObjectName {...this.props} />
+          <ObjectName {...this.props} onKeyClick={this.handleKeySelect} />
           <span {...Theme(theme, 'brace')}>
-            {object_type === 'array' ? '[' : '{'}
+            {objectType === 'array' ? '[' : '{'}
           </span>
         </span>
       </span>
@@ -179,7 +198,7 @@ class RjvObject extends React.PureComponent {
       namespace,
       name,
       type,
-      parent_type,
+      parent_type: parentType,
       theme,
       jsvRoot,
       iconStyle,
@@ -188,12 +207,12 @@ class RjvObject extends React.PureComponent {
       ...rest
     } = this.props
 
-    const { object_type, expanded } = this.state
+    const { object_type: objectType, expanded } = this.state
 
     const styles = {}
-    if (!jsvRoot && parent_type !== 'array_group') {
+    if (!jsvRoot && parentType !== 'array_group') {
       styles.paddingLeft = this.props.indentWidth * SINGLE_INDENT
-    } else if (parent_type === 'array_group') {
+    } else if (parentType === 'array_group') {
       styles.borderLeft = 0
       styles.display = 'inline'
     }
@@ -205,7 +224,7 @@ class RjvObject extends React.PureComponent {
         onMouseLeave={() => this.setState({ ...this.state, hovered: false })}
         {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles)}
       >
-        {this.getBraceStart(object_type, expanded)}
+        {this.getBraceStart(objectType, expanded)}
         {expanded
           ? this.getObjectContent(depth, src, {
             theme,
@@ -220,13 +239,11 @@ class RjvObject extends React.PureComponent {
               paddingLeft: expanded ? '3px' : '0px'
             }}
           >
-            {object_type === 'array' ? ']' : '}'}
+            {objectType === 'array' ? ']' : '}'}
           </span>
         </span>
         {showComma && !isLast && !jsvRoot && (
-          <span {...Theme(theme, 'comma')}>
-            ,
-          </span>
+          <span {...Theme(theme, 'comma')}>,</span>
         )}
         {this.getObjectMetaData(src)}
       </div>
@@ -236,17 +253,17 @@ class RjvObject extends React.PureComponent {
   renderObjectContents = (variables, props) => {
     const {
       depth,
-      parent_type,
-      index_offset,
+      parent_type: parentType,
+      index_offset: indexOffset,
       groupArraysAfterLength,
       namespace,
-      showComma,
+      showComma
     } = this.props
-    const { object_type } = this.state
+    const { object_type: objectType } = this.state
     const elements = []
     let variable
     let keys = Object.keys(variables || {})
-    if (this.props.sortKeys && object_type !== 'array') {
+    if (this.props.sortKeys && objectType !== 'array') {
       keys = keys.sort()
     }
 
@@ -254,11 +271,13 @@ class RjvObject extends React.PureComponent {
       variable = new JsonVariable(name, variables[name], props.bigNumber)
       const isLast = index === keys.length - 1
 
-      if (parent_type === 'array_group' && index_offset) {
-        variable.name = parseInt(variable.name) + index_offset
+      if (parentType === 'array_group' && indexOffset) {
+        variable.name = parseInt(variable.name, 10) + indexOffset
       }
       if (!Object.prototype.hasOwnProperty.call(variables, name)) {
-      } else if (variable.type === 'object') {
+        return
+      }
+      if (variable.type === 'object') {
         elements.push(
           <JsonObject
             key={variable.name}
@@ -266,7 +285,7 @@ class RjvObject extends React.PureComponent {
             name={variable.name}
             src={variable.value}
             namespace={namespace.concat(variable.name)}
-            parent_type={object_type}
+            parent_type={objectType}
             isLast={isLast}
             showComma={showComma}
             {...props}
@@ -290,7 +309,7 @@ class RjvObject extends React.PureComponent {
             src={variable.value}
             namespace={namespace.concat(variable.name)}
             type='array'
-            parent_type={object_type}
+            parent_type={objectType}
             isLast={isLast}
             showComma={showComma}
             {...props}

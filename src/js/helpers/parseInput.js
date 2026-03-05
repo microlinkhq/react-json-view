@@ -13,8 +13,8 @@ export default function parseInput (input, bigNumber) {
       // object
       return formatResponse('object', JSON.parse(input))
     } else if (
-      input.match(/\-?\d+\.\d+/) &&
-      input.match(/\-?\d+\.\d+/)[0] === input
+      input.match(/-?\d+\.\d+/) &&
+      input.match(/-?\d+\.\d+/)[0] === input
     ) {
       // big number
       if (bigNumber && parseFloat(input).toString() !== input) {
@@ -23,12 +23,12 @@ export default function parseInput (input, bigNumber) {
       // float
       return formatResponse('float', parseFloat(input))
     } else if (
-      input.match(/\-?\d+e-\d+/) &&
-      input.match(/\-?\d+e-\d+/)[0] === input
+      input.match(/-?\d+e-\d+/) &&
+      input.match(/-?\d+e-\d+/)[0] === input
     ) {
       // scientific float
       return formatResponse('float', Number(input))
-    } else if (input.match(/\-?\d+/) && input.match(/\-?\d+/)[0] === input) {
+    } else if (input.match(/-?\d+/) && input.match(/-?\d+/)[0] === input) {
       // big number
       if (bigNumber && parseInt(input).toString() !== input) {
         return formatResponse('bigNumber', input)
@@ -36,8 +36,8 @@ export default function parseInput (input, bigNumber) {
       // integer
       return formatResponse('integer', parseInt(input))
     } else if (
-      input.match(/\-?\d+e\+\d+/) &&
-      input.match(/\-?\d+e\+\d+/)[0] === input
+      input.match(/-?\d+e\+\d+/) &&
+      input.match(/-?\d+e\+\d+/)[0] === input
     ) {
       // scientific integer
       return formatResponse('integer', Number(input))

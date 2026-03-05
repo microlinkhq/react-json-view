@@ -2,6 +2,10 @@ import { EventEmitter } from 'events'
 import dispatcher from './../helpers/dispatcher'
 import { toType } from './../helpers/util'
 
+const UPDATED_SRC_KEY = 'updated_src'
+const NEW_VALUE_KEY = 'new_value'
+const VARIABLE_REMOVED_KEY = 'variable_removed'
+
 // store persistent display attributes for objects and arrays
 class ObjectAttributes extends EventEmitter {
   objects = {}
@@ -16,13 +20,13 @@ class ObjectAttributes extends EventEmitter {
     this.objects[rjvId][name][key] = value
   }
 
-  get = (rjvId, name, key, default_value) => {
+  get = (rjvId, name, key, defaultValue) => {
     if (
       this.objects[rjvId] === undefined ||
       this.objects[rjvId][name] === undefined ||
-      this.objects[rjvId][name][key] == undefined
+      this.objects[rjvId][name][key] === undefined
     ) {
-      return default_value
+      return defaultValue
     }
     return this.objects[rjvId][name][key]
   }
@@ -34,7 +38,7 @@ class ObjectAttributes extends EventEmitter {
         this.emit('reset-' + rjvId)
         break
       case 'VARIABLE_UPDATED':
-        action.data.updated_src = this.updateSrc(rjvId, data)
+        action.data[UPDATED_SRC_KEY] = this.updateSrc(rjvId, data)
         this.set(rjvId, 'action', 'variable-update', {
           ...data,
           type: 'variable-edited'
@@ -42,7 +46,7 @@ class ObjectAttributes extends EventEmitter {
         this.emit('variable-update-' + rjvId)
         break
       case 'VARIABLE_REMOVED':
-        action.data.updated_src = this.updateSrc(rjvId, data)
+        action.data[UPDATED_SRC_KEY] = this.updateSrc(rjvId, data)
         this.set(rjvId, 'action', 'variable-update', {
           ...data,
           type: 'variable-removed'
@@ -50,7 +54,7 @@ class ObjectAttributes extends EventEmitter {
         this.emit('variable-update-' + rjvId)
         break
       case 'VARIABLE_ADDED':
-        action.data.updated_src = this.updateSrc(rjvId, data)
+        action.data[UPDATED_SRC_KEY] = this.updateSrc(rjvId, data)
         this.set(rjvId, 'action', 'variable-update', {
           ...data,
           type: 'variable-added'
@@ -65,24 +69,25 @@ class ObjectAttributes extends EventEmitter {
   }
 
   updateSrc = (rjvId, request) => {
-    const { name, namespace, new_value, existing_value, variable_removed } =
-      request
+    const { name, namespace } = request
+    const newValue = request[NEW_VALUE_KEY]
+    const variableRemoved = request[VARIABLE_REMOVED_KEY]
 
     namespace.shift()
 
     // deepy copy src
     const src = this.get(rjvId, 'global', 'src')
     // deep copy of src variable
-    let updated_src = this.deepCopy(src, [...namespace])
+    let updatedSrc = this.deepCopy(src, [...namespace])
 
     // point at current index
-    let walk = updated_src
+    let walk = updatedSrc
     for (const idx of namespace) {
       walk = walk[idx]
     }
 
-    if (variable_removed) {
-      if (toType(walk) == 'array') {
+    if (variableRemoved) {
+      if (toType(walk) === 'array') {
         walk.splice(name, 1)
       } else {
         delete walk[name]
@@ -90,28 +95,28 @@ class ObjectAttributes extends EventEmitter {
     } else {
       // update copied variable at specified namespace
       if (name !== null) {
-        walk[name] = new_value
+        walk[name] = newValue
       } else {
-        updated_src = new_value
+        updatedSrc = newValue
       }
     }
 
-    this.set(rjvId, 'global', 'src', updated_src)
+    this.set(rjvId, 'global', 'src', updatedSrc)
 
-    return updated_src
+    return updatedSrc
   }
 
-  deepCopy = (src, copy_namespace) => {
+  deepCopy = (src, copyNamespace) => {
     const type = toType(src)
     let result
-    const idx = copy_namespace.shift()
-    if (type == 'array') {
+    const idx = copyNamespace.shift()
+    if (type === 'array') {
       result = [...src]
-    } else if (type == 'object') {
+    } else if (type === 'object') {
       result = { ...src }
     }
     if (idx !== undefined) {
-      result[idx] = this.deepCopy(src[idx], copy_namespace)
+      result[idx] = this.deepCopy(src[idx], copyNamespace)
     }
     return result
   }

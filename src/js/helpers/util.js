@@ -1,6 +1,5 @@
 // returns a string "type" of input object
 export function toType (obj, bigNumber) {
-
   /* Check if the object is an instance of the custom BigNumber class passed in as a prop
    * If it matches, return 'bigNumber' type so it can be displayed appropriately
    */
@@ -12,7 +11,7 @@ export function toType (obj, bigNumber) {
   if (type === 'number') {
     if (isNaN(obj)) {
       type = 'nan'
-    } else if ((obj | 0) != obj) {
+    } else if ((obj | 0) !== obj) {
       // bitwise OR produces integers
       type = 'float'
     } else {
@@ -41,7 +40,7 @@ export function escapeString (value) {
 
 // validation for base-16 themes
 export function isTheme (theme) {
-  const theme_keys = [
+  const themeKeys = [
     'base00',
     'base01',
     'base02',
@@ -60,8 +59,8 @@ export function isTheme (theme) {
     'base0F'
   ]
   if (toType(theme) === 'object') {
-    for (let i = 0; i < theme_keys.length; i++) {
-      if (!(theme_keys[i] in theme)) {
+    for (let i = 0; i < themeKeys.length; i++) {
+      if (!(themeKeys[i] in theme)) {
         return false
       }
     }

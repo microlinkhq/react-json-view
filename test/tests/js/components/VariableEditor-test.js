@@ -1,8 +1,7 @@
 import React from 'react'
-import { shallow, render, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import Index from './../../../../src/js/index'
 import VariableEditor from './../../../../src/js/components/VariableEditor'
 
 describe('<VariableEditor />', function () {
@@ -13,7 +12,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         singleIndent={1}
         variable={{
@@ -48,7 +47,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -61,12 +60,40 @@ describe('<VariableEditor />', function () {
     expect(wrapper.find('.click-to-edit')).to.have.length(0)
   })
 
+  it('VariableEditor should call onSelect when clicking object key', function () {
+    let selected = null
+    const wrapper = shallow(
+      <VariableEditor
+        src={{ test: true }}
+        theme='rjv-default'
+        onSelect={data => {
+          selected = data
+        }}
+        keyModifier={() => false}
+        namespace={['root', 'parent']}
+        rjvId={rjvId}
+        variable={{
+          name: 'test',
+          value: 5,
+          type: 'int'
+        }}
+      />
+    )
+    wrapper.find('.object-key').simulate('click')
+    expect(selected).to.deep.equal({
+      name: 'test',
+      value: 5,
+      type: 'int',
+      namespace: ['parent']
+    })
+  })
+
   it('VariableEditor test textarea and cancel icon', function () {
     const wrapper = shallow(
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -84,20 +111,20 @@ describe('<VariableEditor />', function () {
   })
 
   it('VariableEditor test textarea and submit icon', function () {
-    const existing_value = 'existing_value'
-    const new_value = 'new_value'
+    const existingValue = 'existing_value'
+    const newValue = 'new_value'
     const wrapper = shallow(
       <VariableEditor
-        src={{ test: existing_value }}
+        src={{ test: existingValue }}
         theme='rjv-default'
         onEdit={edit => {
-          expect(edit.updated_src.test).to.equal(new_value)
+          expect(edit.updated_src.test).to.equal(newValue)
         }}
         namespace={['test']}
         rjvId={rjvId}
         variable={{
           name: 'test',
-          value: existing_value,
+          value: existingValue,
           type: 'string'
         }}
       />
@@ -111,10 +138,10 @@ describe('<VariableEditor />', function () {
     expect(wrapper.state('editMode')).to.equal(true)
     // make sure default textarea value is correct
     expect(wrapper.find('.variable-editor').props().value).to.equal(
-      existing_value
+      existingValue
     )
     // update edit value
-    wrapper.setState({ editValue: new_value })
+    wrapper.setState({ editValue: newValue })
     // submit new value
     wrapper.find('.edit-check').simulate('click')
     // make sure editMode is off after submit
@@ -122,20 +149,20 @@ describe('<VariableEditor />', function () {
   })
 
   it('VariableEditor edit after src change should respect current src', function () {
-    const existing_value = 'existing_value'
-    const new_value = 'new_value'
+    const existingValue = 'existing_value'
+    const newValue = 'new_value'
     const wrapper = shallow(
       <VariableEditor
-        src={{ test: existing_value }}
+        src={{ test: existingValue }}
         theme='rjv-default'
         onEdit={edit => {
-          expect(edit.updated_src.test).to.equal(new_value)
+          expect(edit.updated_src.test).to.equal(newValue)
         }}
         namespace={['test']}
         rjvId={rjvId}
         variable={{
           name: 'test',
-          value: existing_value,
+          value: existingValue,
           type: 'string'
         }}
       />
@@ -149,10 +176,10 @@ describe('<VariableEditor />', function () {
     expect(wrapper.state('editMode')).to.equal(true)
     // make sure default textarea value is correct
     expect(wrapper.find('.variable-editor').props().value).to.equal(
-      existing_value
+      existingValue
     )
     // update edit value
-    wrapper.setState({ editValue: new_value })
+    wrapper.setState({ editValue: newValue })
     // cancel update
     wrapper.find('.edit-cancel').simulate('click')
     // make sure editMode is off after cancel
@@ -163,7 +190,7 @@ describe('<VariableEditor />', function () {
     expect(wrapper.state('editMode')).to.equal(true)
     // make sure that textarea still contains original value
     expect(wrapper.find('.variable-editor').props().value).to.equal(
-      existing_value
+      existingValue
     )
   })
 
@@ -172,7 +199,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -192,7 +219,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -212,7 +239,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -232,7 +259,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -252,7 +279,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -274,7 +301,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -294,7 +321,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -314,7 +341,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -334,7 +361,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         variable={{
           name: 'test',
@@ -354,7 +381,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         variable={{
           name: '\\\n\t\r\f\\n',
@@ -378,7 +405,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         showComma
         isLast={false}
@@ -389,7 +416,9 @@ describe('<VariableEditor />', function () {
         }}
       />
     )
-    expect(wrapper.find('span').someWhere(node => node.text() === ',')).to.be.true
+    expect(
+      wrapper.find('span').someWhere(node => node.text() === ',')
+    ).to.equal(true)
   })
 
   it('VariableEditor should not show comma when showComma is false', function () {
@@ -397,7 +426,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         showComma={false}
         isLast={false}
@@ -408,7 +437,9 @@ describe('<VariableEditor />', function () {
         }}
       />
     )
-    expect(wrapper.find('span').someWhere(node => node.text() === ',')).to.be.false
+    expect(
+      wrapper.find('span').someWhere(node => node.text() === ',')
+    ).to.equal(false)
   })
 
   it('VariableEditor should not show comma when isLast is true', function () {
@@ -416,7 +447,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         showComma
         isLast
@@ -427,7 +458,9 @@ describe('<VariableEditor />', function () {
         }}
       />
     )
-    expect(wrapper.find('span').someWhere(node => node.text() === ',')).to.be.false
+    expect(
+      wrapper.find('span').someWhere(node => node.text() === ',')
+    ).to.equal(false)
   })
 
   it('VariableEditor should render comma before tools when showComma is true', function () {
@@ -435,7 +468,7 @@ describe('<VariableEditor />', function () {
       <VariableEditor
         src={{ test: true }}
         theme='rjv-default'
-        onEdit={edit => { }}
+        onEdit={edit => {}}
         rjvId={rjvId}
         showComma
         isLast={false}
@@ -446,10 +479,12 @@ describe('<VariableEditor />', function () {
         }}
       />
     )
-    
+
     // Check that comma exists
-    expect(wrapper.find('span').someWhere(node => node.text() === ',')).to.be.true
-    
+    expect(
+      wrapper.find('span').someWhere(node => node.text() === ',')
+    ).to.equal(true)
+
     // Check that tools (edit icon) exist
     const editIcon = wrapper.find('.click-to-edit-icon')
     expect(editIcon).to.have.length(1)

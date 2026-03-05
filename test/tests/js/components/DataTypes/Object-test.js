@@ -8,7 +8,7 @@ describe('<JsonObject />', function () {
   const rjvId = 1
 
   it('Object component should have a data type label', function () {
-    let src = {
+    const src = {
       test: true
     }
     const wrapper = shallow(
@@ -19,7 +19,7 @@ describe('<JsonObject />', function () {
         theme='rjv-default'
         indentWidth={1}
         depth={1}
-        displayDataTypes={true}
+        displayDataTypes
         type='object'
       />
     )
@@ -27,21 +27,21 @@ describe('<JsonObject />', function () {
   })
 
   it('Object mount, multiple data type labels', function () {
-    let src = {
-      bool: true, //should have label
-      int: 5, //should have label
-      str: 'test', //should have label
+    const src = {
+      bool: true, // should have label
+      int: 5, // should have label
+      str: 'test', // should have label
       nan: NaN,
       null: null,
-      undefined: undefined,
-      func: function () {}, //should have label
-      float: 1.325, //should have label
+      undefined,
+      func: function () {}, // should have label
+      float: 1.325, // should have label
       arr: [
-        1, //should have label
-        2 //should have label
+        1, // should have label
+        2 // should have label
       ],
       obj: {
-        test: true //should have label
+        test: true // should have label
       },
       empty_arr: [],
       empty_obj: {}
@@ -55,7 +55,7 @@ describe('<JsonObject />', function () {
         indentWidth={1}
         depth={1}
         collapsed={false}
-        displayDataTypes={true}
+        displayDataTypes
         type='object'
       />
     )
@@ -63,21 +63,21 @@ describe('<JsonObject />', function () {
   })
 
   it('Object mount, no data type labels when collapsed', function () {
-    let src = {
-      bool: true, //should have label
-      int: 5, //should have label
-      str: 'test', //should have label
+    const src = {
+      bool: true, // should have label
+      int: 5, // should have label
+      str: 'test', // should have label
       nan: NaN,
       null: null,
-      undefined: undefined,
-      func: function () {}, //should have label
-      float: 1.325, //should have label
+      undefined,
+      func: function () {}, // should have label
+      float: 1.325, // should have label
       arr: [
-        1, //should have label
-        2 //should have label
+        1, // should have label
+        2 // should have label
       ],
       obj: {
-        test: true //should have label
+        test: true // should have label
       }
     }
     const wrapper = render(
@@ -88,8 +88,8 @@ describe('<JsonObject />', function () {
         theme='rjv-default'
         indentWidth={1}
         depth={1}
-        displayDataTypes={true}
-        collapsed={true}
+        displayDataTypes
+        collapsed
         type='object'
       />
     )
@@ -97,8 +97,8 @@ describe('<JsonObject />', function () {
   })
 
   it('Array mount expanded', function () {
-    let src = {
-      arr1: [('arr2': ['test'])]
+    const src = {
+      arr1: [{ arr2: ['test'] }]
     }
     const wrapper = render(
       <JsonObject
@@ -110,17 +110,17 @@ describe('<JsonObject />', function () {
         indentWidth={1}
         collapsed={false}
         depth={1}
-        displayDataTypes={true}
+        displayDataTypes
         type='array'
       />
     )
-    expect(wrapper.find('.expanded-icon')).to.have.length(2)
+    expect(wrapper.find('.expanded-icon')).to.have.length(4)
     expect(wrapper.find('.collapsed-icon')).to.have.length(0)
   })
 
   it('Array mount collapsed', function () {
-    let src = {
-      arr1: [('arr2': ['test'])]
+    const src = {
+      arr1: [{ arr2: ['test'] }]
     }
     const wrapper = render(
       <JsonObject
@@ -129,7 +129,7 @@ describe('<JsonObject />', function () {
         name='test'
         rjvId={rjvId}
         theme='rjv-default'
-        collapsed={true}
+        collapsed
         indentWidth={1}
         depth={1}
         type='array'
@@ -140,8 +140,8 @@ describe('<JsonObject />', function () {
   })
 
   it('Array mount collapsed circle', function () {
-    let src = {
-      arr1: [('arr2': ['test'])]
+    const src = {
+      arr1: [{ arr2: ['test'] }]
     }
     const wrapper = render(
       <JsonObject
@@ -150,7 +150,7 @@ describe('<JsonObject />', function () {
         name='test'
         rjvId={rjvId}
         theme='rjv-default'
-        collapsed={true}
+        collapsed
         indentWidth={1}
         depth={1}
         type='array'
@@ -161,8 +161,8 @@ describe('<JsonObject />', function () {
   })
 
   it('Array mount collapsed square', function () {
-    let src = {
-      arr1: [('arr2': ['test'])]
+    const src = {
+      arr1: [{ arr2: ['test'] }]
     }
     const wrapper = render(
       <JsonObject
@@ -171,7 +171,7 @@ describe('<JsonObject />', function () {
         name='test'
         rjvId={rjvId}
         theme='rjv-default'
-        collapsed={true}
+        collapsed
         indentWidth={1}
         depth={1}
         iconStyle='square'
@@ -183,8 +183,8 @@ describe('<JsonObject />', function () {
   })
 
   it('Array mount collapsed triangle', function () {
-    let src = {
-      arr1: [('arr2': ['test'])]
+    const src = {
+      arr1: [{ arr2: ['test'] }]
     }
     const wrapper = render(
       <JsonObject
@@ -193,7 +193,7 @@ describe('<JsonObject />', function () {
         name='test'
         rjvId={rjvId}
         theme='rjv-default'
-        collapsed={true}
+        collapsed
         indentWidth={1}
         depth={1}
         iconStyle='triangle'
@@ -205,7 +205,7 @@ describe('<JsonObject />', function () {
   })
 
   it('non-empty object should be expanded', function () {
-    let src = { test: true }
+    const src = { test: true }
 
     const wrapper = shallow(
       <JsonObject
@@ -219,7 +219,7 @@ describe('<JsonObject />', function () {
   })
 
   it('empty object should not be expanded', function () {
-    let src = {}
+    const src = {}
 
     const wrapper = shallow(
       <JsonObject
@@ -234,7 +234,7 @@ describe('<JsonObject />', function () {
   })
 
   it('non-empty array should be expanded', function () {
-    let src = [1, 2, 3]
+    const src = [1, 2, 3]
 
     const wrapper = shallow(
       <JsonObject
@@ -248,8 +248,67 @@ describe('<JsonObject />', function () {
     expect(wrapper.state('expanded')).to.equal(true)
   })
 
+  it('Object should call onSelect when clicking key for object values', function () {
+    const src = {}
+    let selected = null
+
+    const wrapper = mount(
+      <JsonObject
+        src={src}
+        theme='rjv-default'
+        namespace={['root', 'settings']}
+        name='settings'
+        rjvId={rjvId}
+        collapsed={false}
+        indentWidth={1}
+        onSelect={data => {
+          selected = data
+        }}
+      />
+    )
+
+    wrapper.find('.object-key').first().simulate('click')
+
+    expect(selected).to.deep.equal({
+      name: 'settings',
+      value: src,
+      type: 'object',
+      namespace: []
+    })
+  })
+
+  it('Object should call onSelect when clicking key for array values', function () {
+    const src = []
+    let selected = null
+
+    const wrapper = mount(
+      <JsonObject
+        src={src}
+        theme='rjv-default'
+        namespace={['root', 'items']}
+        name='items'
+        type='array'
+        rjvId={rjvId}
+        collapsed={false}
+        indentWidth={1}
+        onSelect={data => {
+          selected = data
+        }}
+      />
+    )
+
+    wrapper.find('.object-key').first().simulate('click')
+
+    expect(selected).to.deep.equal({
+      name: 'items',
+      value: src,
+      type: 'array',
+      namespace: []
+    })
+  })
+
   it('empty array should not be expanded', function () {
-    let src = []
+    const src = []
 
     const wrapper = shallow(
       <JsonObject
@@ -264,7 +323,7 @@ describe('<JsonObject />', function () {
   })
 
   it('non-empty array should have ellipsis', function () {
-    let src = [1, 2, 3]
+    const src = [1, 2, 3]
 
     const wrapper = render(
       <JsonObject
@@ -272,7 +331,7 @@ describe('<JsonObject />', function () {
         theme='rjv-default'
         namespace={['root']}
         rjvId={rjvId}
-        collapsed={true}
+        collapsed
         indentWidth={1}
       />
     )
@@ -281,7 +340,7 @@ describe('<JsonObject />', function () {
   })
 
   it('empty array should not have ellipsis', function () {
-    let src = []
+    const src = []
 
     const wrapper = render(
       <JsonObject
@@ -289,7 +348,7 @@ describe('<JsonObject />', function () {
         theme='rjv-default'
         namespace={['root']}
         rjvId={rjvId}
-        collapsed={true}
+        collapsed
         indentWidth={1}
       />
     )
@@ -298,7 +357,7 @@ describe('<JsonObject />', function () {
   })
 
   it('should collapse at shouldCollapse logic', function () {
-    let src = { prop1: 1, prop2: 2, prop3: 3 }
+    const src = { prop1: 1, prop2: 2, prop3: 3 }
 
     const wrapper = shallow(
       <JsonObject
@@ -314,7 +373,7 @@ describe('<JsonObject />', function () {
   })
 
   it('should expand based on shouldCollapse logic', function () {
-    let src = { prop1: 1, prop2: 2, prop3: 3 }
+    const src = { prop1: 1, prop2: 2, prop3: 3 }
 
     const wrapper = shallow(
       <JsonObject
@@ -330,7 +389,7 @@ describe('<JsonObject />', function () {
     expect(wrapper.state('expanded')).to.equal(true)
   })
   it('sort object keys', () => {
-    let src = {
+    const src = {
       d: 'd',
       b: 'b',
       a: 'a',
@@ -342,10 +401,10 @@ describe('<JsonObject />', function () {
         src={src}
         theme='rjv-default'
         namespace={['root']}
-        sortKeys={true}
+        sortKeys
         collapsed={false}
         shouldCollapse={() => false}
-        quotesOnKeys={true}
+        quotesOnKeys
         indentWidth={1}
       />
     )
@@ -353,7 +412,7 @@ describe('<JsonObject />', function () {
   })
 
   it('do not sort object keys', () => {
-    let src = {
+    const src = {
       d: 'd',
       b: 'b',
       a: 'a',
@@ -367,7 +426,7 @@ describe('<JsonObject />', function () {
         namespace={['root']}
         collapsed={false}
         shouldCollapse={() => false}
-        quotesOnKeys={true}
+        quotesOnKeys
         indentWidth={1}
       />
     )
@@ -375,7 +434,7 @@ describe('<JsonObject />', function () {
   })
 
   it('Object should show comma when showComma is true and not last element', function () {
-    let src = {
+    const src = {
       prop1: 1,
       prop2: 2
     }
@@ -394,11 +453,13 @@ describe('<JsonObject />', function () {
         type='object'
       />
     )
-    expect(wrapper.find('span').someWhere(node => node.text() === ',')).to.be.true
+    expect(
+      wrapper.find('span').someWhere(node => node.text() === ',')
+    ).to.equal(true)
   })
 
   it('Object should not show comma when showComma is false', function () {
-    let src = {
+    const src = {
       prop1: 1,
       prop2: 2
     }
@@ -417,11 +478,13 @@ describe('<JsonObject />', function () {
         type='object'
       />
     )
-    expect(wrapper.find('span').someWhere(node => node.text() === ',')).to.be.false
+    expect(
+      wrapper.find('span').someWhere(node => node.text() === ',')
+    ).to.equal(false)
   })
 
   it('Object should not show comma when isLast is true', function () {
-    let src = {
+    const src = {
       prop1: 1,
       prop2: 2
     }
@@ -440,11 +503,13 @@ describe('<JsonObject />', function () {
         type='object'
       />
     )
-    expect(wrapper.find('span').someWhere(node => node.text() === ',')).to.be.false
+    expect(
+      wrapper.find('span').someWhere(node => node.text() === ',')
+    ).to.equal(false)
   })
 
   it('Object should not show comma when jsvRoot is true', function () {
-    let src = {
+    const src = {
       prop1: 1,
       prop2: 2
     }
@@ -464,6 +529,8 @@ describe('<JsonObject />', function () {
         type='object'
       />
     )
-    expect(wrapper.find('span').someWhere(node => node.text() === ',')).to.be.false
+    expect(
+      wrapper.find('span').someWhere(node => node.text() === ',')
+    ).to.equal(false)
   })
 })

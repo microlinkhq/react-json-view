@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow, render, mount } from 'enzyme'
+import { mount } from 'enzyme'
 import { expect } from 'chai'
 
 import ObjectKeyModal from './../../../../../src/js/components/ObjectKeyModal/ObjectKeyModal'
@@ -32,12 +32,12 @@ describe('<ObjectKeyModal />', function () {
   })
 
   it('ObjectKeyModal invalid input', function () {
-    let valid_counter = 0
+    let validCounter = 0
     const wrapper = mount(
       <ObjectKeyModal
         input='test'
         isValid={input => {
-          valid_counter++
+          validCounter++
           return input !== 'invalid'
         }}
         submit={() => {
@@ -57,11 +57,11 @@ describe('<ObjectKeyModal />', function () {
     expect(wrapper.find('.key-modal-input').props().value).to.equal('invalid')
     expect(wrapper.find('.key-modal-submit').length).to.equal(0)
     // initial validation plus simluated input change
-    expect(valid_counter).to.equal(2)
+    expect(validCounter).to.equal(2)
   })
 
   it('ObjectKeyModal test submit', function () {
-    let submit_counter = 0
+    let submitCounter = 0
     const wrapper = mount(
       <ObjectKeyModal
         input='test'
@@ -70,7 +70,7 @@ describe('<ObjectKeyModal />', function () {
         }}
         submit={input => {
           expect(input).to.equal('test')
-          submit_counter++
+          submitCounter++
           return true
         }}
         theme='rjv-default'
@@ -80,7 +80,7 @@ describe('<ObjectKeyModal />', function () {
 
     expect(wrapper.find('.key-modal-submit').length).to.equal(2)
     wrapper.find('.key-modal-submit').first().simulate('click')
-    expect(submit_counter).to.equal(1)
+    expect(submitCounter).to.equal(1)
   })
 
   it('ObjectKeyModal simulate modal close click', function () {
@@ -125,7 +125,7 @@ describe('<ObjectKeyModal />', function () {
   })
 
   it('ObjectKeyModal submit with Enter key press', function () {
-    let submit_counter = 0
+    let submitCounter = 0
     const wrapper = mount(
       <ObjectKeyModal
         input='test'
@@ -133,7 +133,7 @@ describe('<ObjectKeyModal />', function () {
           return true
         }}
         submit={() => {
-          submit_counter++
+          submitCounter++
           return true
         }}
         theme='rjv-default'
@@ -144,12 +144,12 @@ describe('<ObjectKeyModal />', function () {
 
     expect(wrapper.find('.key-modal-input').length).to.equal(1)
     wrapper.find('.key-modal-input').simulate('keyPress', { key: 'Enter' })
-    expect(submit_counter).to.equal(1)
+    expect(submitCounter).to.equal(1)
     expect(wrapper.state('input')).to.equal('test')
   })
 
   it('ObjectKeyModal close with Escape', function () {
-    let submit_counter = 0
+    let submitCounter = 0
     const wrapper = mount(
       <ObjectKeyModal
         input='test'
@@ -157,7 +157,7 @@ describe('<ObjectKeyModal />', function () {
           return true
         }}
         submit={() => {
-          submit_counter++
+          submitCounter++
           return true
         }}
         theme='rjv-default'
@@ -168,7 +168,7 @@ describe('<ObjectKeyModal />', function () {
 
     expect(wrapper.find('.key-modal-input').length).to.equal(1)
     wrapper.find('.key-modal-input').simulate('keyPress', { key: 'Escape' })
-    expect(submit_counter).to.equal(0)
+    expect(submitCounter).to.equal(0)
     expect(wrapper.state('input')).to.equal('test')
   })
 })

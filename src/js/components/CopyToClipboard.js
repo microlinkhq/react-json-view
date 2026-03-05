@@ -95,7 +95,7 @@ export default class extends React.PureComponent {
   }
 
   render () {
-    const { src, theme, hidden, rowHovered } = this.props
+    const { theme, hidden, rowHovered } = this.props
     const style = Theme(theme, 'copy-to-clipboard').style
     let display = 'inline'
 

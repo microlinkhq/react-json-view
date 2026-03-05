@@ -53,18 +53,18 @@ describe('<VariableMeta />', function () {
   })
 
   it('VariableMeta clipboard click with copy callback', function () {
-    const input_src = { test: true }
-    let callback_counter = 0
+    const inputSrc = { test: true }
+    let callbackCounter = 0
     const wrapper = mount(
       <VariableMeta
-        src={input_src}
+        src={inputSrc}
         size={1}
         theme='rjv-default'
         namespace={['test']}
         enableClipboard={copy => {
-          expect(copy.src.test).to.equal(input_src.test)
+          expect(copy.src.test).to.equal(inputSrc.test)
           // increment counter to assert that callback was called
-          callback_counter++
+          callbackCounter++
         }}
         onAdd={false}
         onDelete={false}
@@ -77,7 +77,7 @@ describe('<VariableMeta />', function () {
     document.execCommand = mock => {}
     wrapper.find('.copy-icon').first().simulate('click')
     // verify that callback was called
-    expect(callback_counter).to.equal(1)
+    expect(callbackCounter).to.equal(1)
   })
 
   it('VariableMeta clipboard click without copy callback', function () {

@@ -4,8 +4,6 @@ import { expect } from 'chai'
 
 import JsonRegex from './../../../../../src/js/components/DataTypes/Function'
 
-import AttributeStore from './../../../../../src/js/stores/ObjectAttributes'
-
 describe('<JsonRegex />', function () {
   const rjvId = 1
 
