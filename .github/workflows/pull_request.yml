@@ -1,0 +1,36 @@
+name: pull_request
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    if: github.ref != 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+          run_install: true
+      - name: Test
+        run: pnpm test
+      - name: Report
+        run: npx c8 report --reporter=text-lcov > coverage/lcov.info
+      - name: Coverage
+        uses: coverallsapp/github-action@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
