@@ -260,7 +260,7 @@
     "treeview"
   ],
   "dependencies": {
-    "react-base16-styling": "~0.9.0",
+    "react-base16-styling": "~0.10.0",
     "react-lifecycles-compat": "~3.0.4",
     "react-textarea-autosize": "~8.5.7"
   },
