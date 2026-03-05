@@ -298,7 +298,7 @@
     "nano-staged": "latest",
     "prettier": "~2.2.1",
     "react": "~16.14.0",
-    "react-dom": "~16.14.0",
+    "react-dom": "~19.2.4",
     "react-select": "~5.10.2",
     "react-test-renderer": "~16.14.0",
     "sass": "~1.97.3",
