@@ -104,22 +104,29 @@ class Demo extends React.PureComponent {
 
   updateStyles = () => {
     const $ = document.querySelector.bind(document)
+    const getStyle = (el, prop) =>
+      window.getComputedStyle(el).getPropertyValue(prop)
+
+    const isTransparent = color =>
+      !color || color === 'transparent' || color === 'rgba(0, 0, 0, 0)'
+
+    const resolveBackground = el => {
+      let current = el
+      while (current) {
+        const bg = getStyle(current, 'background-color')
+        if (!isTransparent(bg)) return bg
+        current = current.parentElement
+      }
+      return 'rgb(255, 255, 255)'
+    }
+
     const siteTheme = {
-      color: $('.object-key').style.color,
-      bgColor: $('.react-json-view').style.backgroundColor,
-      borderColor: $('.variable-row').style.borderLeftColor
+      color: getStyle($('.object-key'), 'color'),
+      bgColor: resolveBackground($('.react-json-view')),
+      borderColor: getStyle($('.variable-row'), 'border-left-color')
     }
 
     this.setState({ siteTheme })
-
-    // console.log(siteTheme)
-    // this.setState({
-    //   siteTheme: {
-    //     color: document.querySelector('.object-key').style.color,
-    //     bgColor: document.querySelector('.react-json-view').style.backgroundColor,
-    //     borderColor: document.querySelector('.variable-row').style.borderLeftColor
-    //   }
-    // })
   }
 
   render () {
