@@ -269,7 +269,7 @@
     "@babel/eslint-parser": "~7.12.1",
     "@babel/plugin-proposal-private-property-in-object": "~7.21.11",
     "@babel/plugin-syntax-class-properties": "~7.12.1",
-    "@babel/plugin-syntax-jsx": "~7.12.1",
+    "@babel/plugin-syntax-jsx": "~7.28.6",
     "@babel/register": "7.12.10",
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "latest",
