@@ -291,7 +291,7 @@
     "finepack": "latest",
     "git-authors-cli": "latest",
     "github-generate-release": "latest",
-    "html-webpack-plugin": "^4.5.2",
+    "html-webpack-plugin": "^5.6.6",
     "ignore-styles": "~5.0.1",
     "jsdom": "~16.4.0",
     "mocha": "~8.2.1",
