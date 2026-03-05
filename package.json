@@ -282,7 +282,7 @@
     "browser-sync": "~3.0.3",
     "c8": "latest",
     "chai": "~4.2.0",
-    "cheerio": "1.0.0-rc.3",
+    "cheerio": "1.2.0",
     "ci-publish": "latest",
     "conventional-changelog-cli": "latest",
     "css-loader": "~4.3.0",
