@@ -293,7 +293,7 @@
     "github-generate-release": "latest",
     "html-webpack-plugin": "^4.5.2",
     "ignore-styles": "~5.0.1",
-    "jsdom": "~16.4.0",
+    "jsdom": "~28.1.0",
     "mocha": "~8.2.1",
     "moment": "~2.29.1",
     "nano-staged": "latest",
