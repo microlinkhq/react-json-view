@@ -2,7 +2,7 @@
   "name": "@microlink/react-json-view",
   "description": "Interactive react component for displaying javascript arrays and JSON objects.",
   "homepage": "https://github.com/microlinkhq/react-json-view",
-  "version": "1.29.0",
+  "version": "1.30.0",
   "types": "index.d.ts",
   "main": "dist/main.js",
   "author": {
