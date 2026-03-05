@@ -295,7 +295,7 @@
     "ignore-styles": "~5.0.1",
     "jsdom": "~28.1.0",
     "mocha": "~8.2.1",
-    "moment": "~2.29.1",
+    "moment": "~2.30.1",
     "nano-staged": "latest",
     "prettier": "~2.2.1",
     "react": "~16.14.0",
