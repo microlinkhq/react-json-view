@@ -295,9 +295,9 @@
     "release:tag": "git tag -a v$(node -p \"require('./package.json').version\") -m \"v$(node -p \"require('./package.json').version\")\"",
     "release:tags": "git push origin HEAD:master --follow-tags",
     "release:version": "standard-version --skip.changelog --skip.commit --skip.tag",
-    "test": "NODE_ENV=test c8 mocha test/**/*-test.js",
-    "test:unit": "NODE_ENV=test c8 mocha test/**/*-test.js",
-    "test:watch": "NODE_ENV=test c8 mocha -w test/**/*-test.js"
+    "test": "NODE_ENV=test c8 mocha --require @babel/register --require test/testHelpers/requireSources.js test/**/*-test.js",
+    "test:unit": "NODE_ENV=test c8 mocha --require @babel/register --require test/testHelpers/requireSources.js test/**/*-test.js",
+    "test:watch": "NODE_ENV=test c8 mocha -w --require @babel/register --require test/testHelpers/requireSources.js test/**/*-test.js"
   },
   "license": "MIT",
   "commitlint": {
