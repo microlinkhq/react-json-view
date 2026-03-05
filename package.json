@@ -274,7 +274,7 @@
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "latest",
     "@ksmithut/prettier-standard": "latest",
-    "babel-loader": "8.4.1",
+    "babel-loader": "10.0.0",
     "babel-plugin-istanbul": "6.1.1",
     "babel-plugin-react-html-attrs": "~2.1.0",
     "babel-preset-react-app": "10.1.0",
