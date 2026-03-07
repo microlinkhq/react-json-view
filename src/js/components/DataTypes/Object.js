@@ -284,7 +284,10 @@ class RjvObject extends React.PureComponent {
       if (!Object.prototype.hasOwnProperty.call(variables, name)) {
         return
       }
-      if(this.isCircularReference(variable)) {
+      if(variable.type.toLowerCase() === 'window'){
+        return;// don't render native objects like `window` since they can be very large and cause performance issues
+      }
+      else if(this.isCircularReference(variable)) {
         elements.push(
           <JsonCircularReference 
             key={variable.name}
@@ -313,7 +316,7 @@ class RjvObject extends React.PureComponent {
             parent_type={objectType}
             isLast={isLast}
             showComma={showComma}
-            listOfAncestors={this.listOfAncestors.concat([this])}
+            listOfAncestors={this.listOfAncestors.concat([this.props.src])}
             {...props}
           />
         );
@@ -338,7 +341,7 @@ class RjvObject extends React.PureComponent {
             parent_type={objectType}
             isLast={isLast}
             showComma={showComma}
-            listOfAncestors={this.listOfAncestors.concat([this])}
+            listOfAncestors={this.listOfAncestors.concat([this.props.src])}
             {...props}
           />
         )
@@ -353,7 +356,6 @@ class RjvObject extends React.PureComponent {
             type={this.props.type}
             isLast={isLast}
             showComma={showComma}
-            listOfAncestors={this.listOfAncestors.concat([this])}
             {...props}
           />
         )
