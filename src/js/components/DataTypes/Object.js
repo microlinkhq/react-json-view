@@ -193,11 +193,6 @@ class RjvObject extends React.PureComponent {
 
   isCircularReference(variable) {
     let found = this.listOfAncestors.indexOf(variable.value) > -1 || variable.value === this.props.src;
-    if(found)
-    {
-      console.warn('circular reference detected at ' + variable.name, variable);
-      console.warn('previously seen values: ', this.listOfAncestors);
-    }
     return found;
   }
 
