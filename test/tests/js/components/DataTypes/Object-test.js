@@ -533,4 +533,32 @@ describe('<JsonObject />', function () {
       wrapper.find('span').someWhere(node => node.text() === ',')
     ).to.equal(false)
   })
+
+  it('Object should show circular reference component', function () {
+    const src = {
+      prop1: 1,
+      prop2: 2
+    }
+    src.self = src;
+
+    const wrapper = shallow(
+      <JsonObject
+        src={src}
+        theme='rjv-default'
+        namespace={['root']}
+        rjvId={rjvId}
+        showComma
+        isLast={false}
+        jsvRoot
+        collapsed={false}
+        indentWidth={1}
+        depth={1}
+        type='object'
+      />
+    )
+    //Not a very good test.  We should be checking that the name of the corresponding property is correct as well, 
+    //but this is better than nothing for now.
+    var circularReferenceComponent = wrapper.find('span').someWhere(node => node.text() === '[CIRCULAR REFERENCE]');
+    expect(circularReferenceComponent).to.not.be.undefined;
+  })
 })
