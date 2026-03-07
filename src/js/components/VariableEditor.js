@@ -248,10 +248,19 @@ class VariableEditor extends React.PureComponent {
         return <JsonRegexp value={variable.value} {...props} />
       case 'bigNumber':
         return <JsonBigNumber value={variable.value} {...props} />
+      case 'circularReference':
+        return <JsonCircularReference value={variable.value} {...props} />
       default:
+        var editValue = "";
+        try{
+          editValue = JSON.stringify(variable.value);
+        }
+        catch(e){
+          editValue = ""
+        }
         // catch-all for types that weren't anticipated
         return (
-          <div className='object-value'>{JSON.stringify(variable.value)}</div>
+          <div className='object-value'>{editValue}</div>
         )
     }
   }
@@ -474,6 +483,8 @@ class VariableEditor extends React.PureComponent {
           return <JsonDate value={new Date(value)} {...props} />
         case 'bignumber':
           return <JsonBigNumber value={value} {...props} />
+        case 'circularreference':
+          return <JsonCircularReference value={variable.value} {...props} />
       }
     }
   }
