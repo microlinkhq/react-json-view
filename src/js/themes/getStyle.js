@@ -1,3 +1,4 @@
+import CircularReference from '../components/DataTypes/CircularReference'
 import { rjvDefault, rjvGrey } from './base16/rjv-themes'
 import constants from './styleConstants'
 import { createStyling } from 'react-base16-styling'
@@ -216,6 +217,15 @@ const getDefaultThemeStyling = theme => {
       padding: constants.undefinedPadding,
       borderRadius: constants.undefinedBorderRadius,
       backgroundColor: colors.dataTypes.background
+    },
+    circularReference: {
+      display: 'inline-block',
+      color: colors.dataTypes.null,
+      fontSize: constants.nullFontSize,
+      fontWeight: constants.nullFontWeight,
+      backgroundColor: colors.dataTypes.background,
+      padding: constants.nullPadding,
+      borderRadius: constants.nullBorderRadius
     },
     regexp: {
       display: 'inline-block',

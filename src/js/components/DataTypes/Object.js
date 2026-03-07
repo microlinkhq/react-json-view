@@ -3,7 +3,7 @@ import { polyfill } from 'react-lifecycles-compat'
 import { toType } from './../../helpers/util'
 
 // data type components
-import { JsonObject } from './DataTypes'
+import { JsonCircularReference, JsonObject } from './DataTypes'
 
 import VariableEditor from './../VariableEditor'
 import VariableMeta from './../VariableMeta'
@@ -32,6 +32,8 @@ class RjvObject extends React.PureComponent {
       ...state,
       prevProps: {}
     }
+    this.listOfAncestors = Array.from(this.props.listOfAncestors || []);
+    this.listOfAncestors.push(props.src);
   }
 
   static getState = props => {
@@ -189,6 +191,16 @@ class RjvObject extends React.PureComponent {
     )
   }
 
+  isCircularReference(variable) {
+    let found = this.listOfAncestors.indexOf(variable.value) > -1 || variable.value === this.props.src;
+    if(found)
+    {
+      console.warn('circular reference detected at ' + variable.name, variable);
+      console.warn('previously seen values: ', this.listOfAncestors);
+    }
+    return found;
+  }
+
   render () {
     // `indentWidth` and `collapsed` props will
     // perpetuate to children via `...rest`
@@ -277,7 +289,25 @@ class RjvObject extends React.PureComponent {
       if (!Object.prototype.hasOwnProperty.call(variables, name)) {
         return
       }
-      if (variable.type === 'object') {
+      if(this.isCircularReference(variable)) {
+        elements.push(
+          <JsonCircularReference 
+            key={variable.name}
+            depth={depth + DEPTH_INCREMENT}
+            name={variable.name}
+            src={variable.value}
+            namespace={namespace.concat(variable.name)}
+            type='array'
+            parent_type={objectType}
+            isLast={isLast}
+            showComma={showComma}
+            singleIndent={SINGLE_INDENT}
+            indentWidth={this.props.indentWidth}
+            {...props}
+          />
+        );
+      }
+      else if (variable.type === 'object') {
         elements.push(
           <JsonObject
             key={variable.name}
@@ -288,9 +318,10 @@ class RjvObject extends React.PureComponent {
             parent_type={objectType}
             isLast={isLast}
             showComma={showComma}
+            listOfAncestors={this.listOfAncestors.concat([this])}
             {...props}
           />
-        )
+        );
       } else if (variable.type === 'array') {
         let ObjectComponent = JsonObject
 
@@ -312,6 +343,7 @@ class RjvObject extends React.PureComponent {
             parent_type={objectType}
             isLast={isLast}
             showComma={showComma}
+            listOfAncestors={this.listOfAncestors.concat([this])}
             {...props}
           />
         )
@@ -326,6 +358,7 @@ class RjvObject extends React.PureComponent {
             type={this.props.type}
             isLast={isLast}
             showComma={showComma}
+            listOfAncestors={this.listOfAncestors.concat([this])}
             {...props}
           />
         )
