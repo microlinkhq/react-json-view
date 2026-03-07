@@ -23,6 +23,7 @@ class BigNumber {
 //render 2 different examples of the react-json-view component
 ReactDom.render(
   <div>
+
     {/* just pass in your JSON to the src attribute */}
     <JsonViewer
       bigNumber={BigNumber}
@@ -249,6 +250,54 @@ ReactDom.render(
       name='String with special escape sequences'
       src={getExampleWithStringEscapeSequences()}
     />
+
+    <br />
+
+    {/* Circular reference example */}
+    <JsonViewer
+      bigNumber={BigNumber}
+      sortKeys
+      style={{ padding: '30px', backgroundColor: 'white' }}
+      src={getExampleJson5()}
+      quotesOnKeys={false}
+      collapseStringsAfterLength={12}
+      onEdit={e => {
+        console.log('edit callback', e)
+        if (e.new_value == 'error') {
+          return false
+        }
+      }}
+      onDelete={e => {
+        console.log('delete callback', e)
+      }}
+      onAdd={e => {
+        console.log('add callback', e)
+        if (e.new_value == 'error') {
+          return false
+        }
+      }}
+      onSelect={e => {
+        console.log('select callback', e)
+        console.log(e.namespace)
+      }}
+      displayObjectSize={true}
+      name={'dev-server'}
+      enableClipboard={copy => {
+        console.log('you copied to clipboard!', copy)
+      }}
+      shouldCollapse={({ src, namespace, type }) => {
+        if (type === 'array' && src.indexOf('test') > -1) {
+          return true
+        } else if (namespace.indexOf('moment') > -1) {
+          return true
+        }
+        return false
+      }}
+      defaultValue=''
+      showComma={true}
+    />
+
+    <br />
   </div>,
   document.getElementById('app-container')
 )
@@ -350,6 +399,40 @@ function getExampleJson4 () {
   large_array.push(new Array(75).fill(Math.random()))
 
   return large_array
+}
+
+//just a function to get an example JSON object
+function getExampleJson5 () {
+  let circularReferenceObject = {
+    string: 'this is a test string',
+    integer: 42,
+    empty_array: [],
+    empty_object: {},
+    array: [1, 2, 3, 'test'],
+    float: -2.757,
+    undefined_var: undefined,
+    parent: {
+      sibling1: true,
+      sibling2: false,
+      sibling3: null,
+      isString: value => {
+        if (typeof value === 'string') {
+          return 'string'
+        } else {
+          return 'other'
+        }
+      }
+    },
+    string_number: '1234',
+    date: new Date(),
+    moment: Moment(),
+    regexp: /[0-9]/gi,
+    bigNumber: new BigNumber('0.0060254656709730629123')
+  }
+  circularReferenceObject.self = circularReferenceObject;
+  circularReferenceObject.parent.nested_circular_reference = circularReferenceObject;
+  circularReferenceObject.parent.self = circularReferenceObject.parent;
+  return circularReferenceObject;
 }
 
 function getExampleArray () {
