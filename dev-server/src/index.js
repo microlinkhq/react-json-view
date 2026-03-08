@@ -20,6 +20,8 @@ class BigNumber {
   }
 }
 
+var circularReferenceObject = getExampleJson5();
+
 //render 2 different examples of the react-json-view component
 ReactDom.render(
   <div>
@@ -258,7 +260,7 @@ ReactDom.render(
       bigNumber={BigNumber}
       sortKeys
       style={{ padding: '30px', backgroundColor: 'white' }}
-      src={getExampleJson5()}
+      src={circularReferenceObject}
       quotesOnKeys={false}
       collapseStringsAfterLength={12}
       onEdit={e => {
@@ -281,7 +283,7 @@ ReactDom.render(
         console.log(e.namespace)
       }}
       displayObjectSize={true}
-      name={'dev-server'}
+      name={'circular-reference-example'}
       enableClipboard={copy => {
         console.log('you copied to clipboard!', copy)
       }}
@@ -296,6 +298,9 @@ ReactDom.render(
       defaultValue=''
       showComma={true}
     />
+    <button onClick={() => {
+      circularReferenceObject.window = window;
+    }}>Test Circular Reference</button>
 
     <br />
   </div>,
