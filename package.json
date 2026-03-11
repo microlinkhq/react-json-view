@@ -288,7 +288,7 @@
     "cheerio": "1.0.0-rc.3",
     "ci-publish": "latest",
     "conventional-changelog-cli": "latest",
-    "css-loader": "~4.3.0",
+    "css-loader": "~7.1.4",
     "enzyme": "~3.11.0",
     "enzyme-adapter-react-16": "~1.15.5",
     "finepack": "latest",
