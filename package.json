@@ -317,7 +317,7 @@
     "webpack-bundle-analyzer": "~5.2.0",
     "webpack-bundle-size-analyzer": "~3.1.0",
     "webpack-cli": "~6.0.1",
-    "webpack-dev-server": "~5.0.4"
+    "webpack-dev-server": "~5.2.3"
   },
   "engines": {
     "node": ">=17"
