@@ -5,7 +5,6 @@
   "version": "1.31.8",
   "types": "index.d.ts",
   "main": "dist/main.js",
-  "module": "index.mjs",
   "exports": {
     ".": {
       "import": "./index.mjs",
@@ -14,6 +13,7 @@
     },
     "./package.json": "./package.json"
   },
+  "module": "index.mjs",
   "author": {
     "name": "Mac Gainor"
   },
@@ -177,6 +177,10 @@
     {
       "name": "Jason Etcovitch",
       "email": "jasonetco@gmail.com"
+    },
+    {
+      "name": "JC Louis",
+      "email": "jean-charles.louis@lifen.fr"
     },
     {
       "name": "liancong",
