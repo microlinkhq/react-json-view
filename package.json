@@ -7,6 +7,7 @@
   "main": "dist/main.js",
   "exports": {
     ".": {
+      "types": "./index.d.ts",
       "import": "./index.mjs",
       "require": "./dist/main.js",
       "default": "./dist/main.js"
