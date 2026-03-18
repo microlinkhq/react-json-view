@@ -138,4 +138,41 @@ describe('<ArrayGroup />', function () {
       namespace: []
     })
   })
+
+  it('ArrayGroup shows object-size ranges for collapsed groups', function () {
+    const groupSize = 100
+    const cases = [
+      { length: 222, expected: ['0 - 99', '100 - 199', '200 - 221'] },
+      { length: 199, expected: ['0 - 99', '100 - 199'] },
+      { length: 101, expected: ['0 - 99', '100 - 100'] }
+    ]
+
+    cases.forEach(({ length, expected }) => {
+      const src = new Array(length).fill('test')
+      const wrapper = render(
+        <ArrayGroup
+          groupArraysAfterLength={groupSize}
+          namespace={['test']}
+          name='test'
+          src={src}
+          theme='rjv-default'
+          jsvRoot={false}
+          indentWidth={4}
+        />
+      )
+
+      const labels = wrapper.find('.object-size')
+      expect(labels).to.have.length(expected.length)
+
+      expected.forEach((range, i) => {
+        const actual = labels
+          .eq(i)
+          .text()
+          .replace(/\s+/g, ' ')
+          .trim()
+
+        expect(actual).to.equal(range)
+      })
+    })
+  })
 })
