@@ -155,9 +155,9 @@ export default class extends React.PureComponent {
                       >
                         {i * size}
                         {' - '}
-                        {i * size + size > src.length
-                          ? src.length
-                          : i * size + size}
+                        {i * size + size - 1 > src.length
+                          ? src.length - 1
+                          : i * size + size - 1}
                       </span>
                     </div>
                     ]
