@@ -298,7 +298,7 @@
     "@ksmithut/prettier-standard": "latest",
     "babel-loader": "10.1.1",
     "babel-plugin-istanbul": "7.0.1",
-    "babel-plugin-react-html-attrs": "~2.1.0",
+    "babel-plugin-react-html-attrs": "~3.0.5",
     "babel-preset-react-app": "10.1.0",
     "browser-sync": "~3.0.3",
     "c8": "latest",
