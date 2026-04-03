@@ -323,7 +323,7 @@
     "react-dom": "~16.14.0",
     "react-select": "~5.10.2",
     "react-test-renderer": "~16.14.0",
-    "sass": "~1.98.0",
+    "sass": "~1.99.0",
     "sass-loader": "~16.0.7",
     "simple-git-hooks": "latest",
     "sinon": "~21.0.2",
