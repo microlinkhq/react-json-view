@@ -326,7 +326,7 @@
     "sass": "~1.99.0",
     "sass-loader": "~16.0.7",
     "simple-git-hooks": "latest",
-    "sinon": "~21.0.2",
+    "sinon": "~21.1.0",
     "standard": "latest",
     "standard-version": "latest",
     "style-loader": "~4.0.0",
