@@ -295,7 +295,6 @@
     "@babel/register": "7.28.6",
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "latest",
-    "@ksmithut/prettier-standard": "latest",
     "babel-loader": "10.1.1",
     "babel-plugin-istanbul": "8.0.0",
     "babel-plugin-react-html-attrs": "~3.0.5",
@@ -381,7 +380,6 @@
   },
   "nano-staged": {
     "*.js": [
-      "prettier-standard",
       "standard --fix"
     ],
     "package.json": [
