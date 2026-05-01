@@ -292,7 +292,7 @@
     "@babel/plugin-proposal-private-property-in-object": "~7.21.11",
     "@babel/plugin-syntax-class-properties": "~7.12.1",
     "@babel/plugin-syntax-jsx": "~7.28.6",
-    "@babel/register": "7.28.6",
+    "@babel/register": "7.29.3",
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "latest",
     "babel-loader": "10.1.1",
