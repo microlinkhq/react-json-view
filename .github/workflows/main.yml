@@ -24,7 +24,7 @@ jobs:
         with:
           version: latest
       - name: Install
-        run: pnpm install --ignore-scripts
+        run: pnpm install --dangerously-allow-all-builds
       - name: Contributors
         run: |
           git config --global user.email "${{ secrets.GIT_EMAIL }}"
@@ -55,7 +55,7 @@ jobs:
         with:
           version: latest
       - name: Install
-        run: pnpm install --ignore-scripts
+        run: pnpm install --dangerously-allow-all-builds
       - name: Test
         run: pnpm test
       - name: Report
