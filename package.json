@@ -287,7 +287,7 @@
     "react-textarea-autosize": "~8.5.9"
   },
   "devDependencies": {
-    "@babel/core": "^7.13.0",
+    "@babel/core": "^8.0.1",
     "@babel/eslint-parser": "~7.29.7",
     "@babel/plugin-proposal-private-property-in-object": "~7.21.11",
     "@babel/plugin-syntax-class-properties": "~7.12.1",
