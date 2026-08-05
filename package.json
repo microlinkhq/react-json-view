@@ -1,6 +1,6 @@
 {
   "name": "@microlink/react-json-view",
-  "description": "Interactive react component for displaying javascript arrays and JSON objects.",
+  "description": "Interactive React component for inspecting JSON objects and arrays with expand/collapse.",
   "homepage": "https://github.com/microlinkhq/react-json-view",
   "version": "1.31.26",
   "types": "index.d.ts",
@@ -260,26 +260,16 @@
     "url": "https://github.com/microlinkhq/react-json-view/issues"
   },
   "keywords": [
-    "array-viewer",
-    "base-16",
     "component",
+    "debug",
+    "devtools",
+    "display",
+    "inspector",
     "interactive",
-    "interactive-json",
     "json",
-    "json-component",
-    "json-display",
-    "json-inspector",
-    "json-tree",
-    "json-tree",
-    "json-view",
-    "json-viewer",
     "react",
-    "react-component",
-    "react-json",
-    "theme",
     "tree",
-    "tree-view",
-    "treeview"
+    "viewer"
   ],
   "dependencies": {
     "react-base16-styling": "~0.10.0",
