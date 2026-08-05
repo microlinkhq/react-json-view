@@ -2,7 +2,7 @@
   "name": "@microlink/react-json-view",
   "description": "Interactive React component for inspecting JSON objects and arrays with expand/collapse.",
   "homepage": "https://github.com/microlinkhq/react-json-view",
-  "version": "1.31.27",
+  "version": "1.31.28",
   "types": "index.d.ts",
   "main": "dist/main.js",
   "exports": {
