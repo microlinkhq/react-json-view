@@ -37,7 +37,7 @@ export default class extends React.PureComponent {
   handleCopy = () => {
     const { clickCallback, src, namespace } = this.props
 
-    const textToCopy = JSON.stringify(this.clipboardValue(src), null, '  ')
+    const textToCopy = this.clipboardText(src)
 
     if (navigator.clipboard) {
       navigator.clipboard.writeText(textToCopy).catch(() => {
@@ -92,6 +92,16 @@ export default class extends React.PureComponent {
       default:
         return value
     }
+  }
+
+  clipboardText = value => {
+    const clipboardValue = this.clipboardValue(value)
+
+    if (typeof clipboardValue === 'string') {
+      return clipboardValue
+    }
+
+    return JSON.stringify(clipboardValue, null, '  ')
   }
 
   render () {
