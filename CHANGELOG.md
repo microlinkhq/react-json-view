@@ -1,3 +1,9 @@
+## 1.31.30 (2026-08-26)
+
+### Bug Fixes
+
+* **types:** add missing showComma prop to type definitions ([#197](https://github.com/microlinkhq/react-json-view/issues/197)) ([6fbb7ec](https://github.com/microlinkhq/react-json-view/commit/6fbb7ecace673b4764942435a6b69877f139d049))
+
 ## 1.31.29 (2026-08-19)
 ## 1.31.28 (2026-08-05)
 ## 1.31.27 (2026-08-05)
