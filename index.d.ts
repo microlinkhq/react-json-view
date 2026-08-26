@@ -166,7 +166,7 @@ export interface ReactJsonViewProps {
    */
   escapeStrings?: boolean
   /**
-   * Whether to show commas between object properties
+   * Whether to show commas between object properties and array elements
    *
    * Default: true
    */
