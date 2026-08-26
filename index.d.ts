@@ -165,6 +165,12 @@ export interface ReactJsonViewProps {
    * Default: true
    */
   escapeStrings?: boolean
+  /**
+   * Whether to show commas between object properties
+   *
+   * Default: true
+   */
+  showComma?: boolean
 }
 
 export interface OnCopyProps {
