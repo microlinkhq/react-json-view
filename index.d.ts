@@ -175,9 +175,9 @@ export interface ReactJsonViewProps {
 
 export interface OnCopyProps {
   /**
-   * The JSON tree source object
+   * The value of the copied entry.
    */
-  src: object
+  src: object | string | number | boolean | null | undefined
   /**
    * List of keys.
    */
