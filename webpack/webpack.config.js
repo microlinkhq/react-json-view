@@ -37,7 +37,12 @@ const config = {
   },
   plugins: [],
   resolve: {
-    extensions: ['.js', '.json', '.css', '.scss']
+    extensions: ['.js', '.json', '.css', '.scss'],
+    alias: {
+      // The browser build reads `document` on import, which breaks SSR.
+      // The default build checks for `document` first, so bundle that one.
+      'react-textarea-autosize$': require.resolve('react-textarea-autosize')
+    }
   },
   module: {
     rules: [
