@@ -177,7 +177,7 @@ export interface OnCopyProps {
   /**
    * The value of the copied entry.
    */
-  src: object | string | number | boolean | null
+  src: object | string | number | boolean | null | undefined
   /**
    * List of keys.
    */
