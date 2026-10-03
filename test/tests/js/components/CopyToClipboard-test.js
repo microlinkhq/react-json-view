@@ -4,7 +4,7 @@ import { expect } from 'chai'
 
 import CopyToClipboard from './../../../../src/js/components/CopyToClipboard'
 
-function copyToClipboard (src) {
+function copyToClipboard (src, clickCallback) {
   const copied = []
   const { clipboard } = global.navigator
 
@@ -20,6 +20,7 @@ function copyToClipboard (src) {
       src={src}
       namespace={['root']}
       theme='rjv-default'
+      clickCallback={clickCallback}
       hidden={false}
     />
   )
@@ -95,5 +96,13 @@ describe('<CopyToClipboard />', function () {
 
   it('CopyToClipboard copies a regexp as source text', function () {
     expect(copyToClipboard(/pattern/g)).to.deep.equal(['/pattern/g'])
+  })
+
+  it('CopyToClipboard passes a string value to clickCallback as src', function () {
+    const calls = []
+    copyToClipboard('a string', copy => calls.push(copy))
+    expect(calls).to.deep.equal([
+      { src: 'a string', namespace: ['root'], name: 'root' }
+    ])
   })
 })
