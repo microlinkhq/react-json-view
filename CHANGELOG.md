@@ -1,3 +1,10 @@
+## 1.31.39 (2026-10-03)
+
+### Bug Fixes
+
+* allow importing the bundle without a DOM ([#210](https://github.com/microlinkhq/react-json-view/issues/210)) ([f3fa2dc](https://github.com/microlinkhq/react-json-view/commit/f3fa2dcb07422527f2c541b83f767c4686dda081)), closes [#149](https://github.com/microlinkhq/react-json-view/issues/149)
+* **types:** allow non-object src in OnCopyProps ([#211](https://github.com/microlinkhq/react-json-view/issues/211)) ([1d93f7d](https://github.com/microlinkhq/react-json-view/commit/1d93f7dfae20f375b1a9b3796cee1b6057b34773))
+
 ## 1.31.38 (2026-09-25)
 
 ## 1.31.37 (2026-09-21)
