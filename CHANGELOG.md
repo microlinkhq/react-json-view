@@ -1,3 +1,9 @@
+## 1.31.45 (2026-11-02)
+
+### Bug Fixes
+
+* keep rejected changes out of later edits ([#218](https://github.com/microlinkhq/react-json-view/issues/218)) ([6f829e8](https://github.com/microlinkhq/react-json-view/commit/6f829e89a7215f5e41d429fab14f9878b9cbf935))
+
 ## 1.31.44 (2026-10-31)
 
 ## 1.31.43 (2026-10-27)
