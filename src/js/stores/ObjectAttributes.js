@@ -69,11 +69,11 @@ class ObjectAttributes extends EventEmitter {
   }
 
   updateSrc = (rjvId, request) => {
+    // Keep the editor's namespace intact when an update is rejected.
+    request.namespace = request.namespace.slice(1)
     const { name, namespace } = request
     const newValue = request[NEW_VALUE_KEY]
     const variableRemoved = request[VARIABLE_REMOVED_KEY]
-
-    namespace.shift()
 
     // deepy copy src
     const src = this.get(rjvId, 'global', 'src')
