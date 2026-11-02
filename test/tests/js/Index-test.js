@@ -6,6 +6,7 @@ import { JSDOM } from 'jsdom'
 
 import Index from './../../../src/js/index'
 import dispatcher from './../../../src/js/helpers/dispatcher'
+import VariableMeta from './../../../src/js/components/VariableMeta'
 
 const { window } = new JSDOM()
 global.window = window
@@ -71,6 +72,36 @@ describe('<Index />', function () {
       wrapper.unmount()
     }
   })
+
+  for (const operation of ['add', 'delete']) {
+    it(`keeps child edits nested after a rejected object ${operation}`, function () {
+      const src = { branch: { editable: 1 } }
+      const reject = sinon.spy(() => false)
+      const onEdit = sinon.spy(() => true)
+      const wrapper = mount(
+        <Index src={src} onEdit={onEdit} onAdd={reject} onDelete={reject} />
+      )
+      try {
+        const meta = wrapper.find(VariableMeta).filterWhere(node => node.prop('name') === 'branch')
+        const icon = operation === 'add' ? 'add' : 'remove'
+        meta.find(`.click-to-${icon}-icon`).hostNodes().simulate('click')
+        if (operation === 'add') {
+          wrapper.find('.key-modal-input').simulate('change', { target: { value: 'newKey' } })
+          wrapper.find('.key-modal-submit').hostNodes().simulate('click')
+        }
+        expect(reject.calledOnce).to.equal(true)
+        expect(wrapper.state('src')).to.deep.equal(src)
+        wrapper.find('.click-to-edit-icon').hostNodes().simulate('click')
+        wrapper.find('textarea').simulate('change', { target: { value: '2' } })
+        wrapper.find('.edit-check.detected').hostNodes().simulate('click')
+        expect(onEdit.lastCall.args[0].namespace).to.deep.equal(['branch'])
+        expect(wrapper.state('src')).to.deep.equal({ branch: { editable: 2 } })
+        expect(src).to.deep.equal({ branch: { editable: 1 } })
+      } finally {
+        wrapper.unmount()
+      }
+    })
+  }
 
   it('check data type labels from index', function () {
     const wrapper = render(
