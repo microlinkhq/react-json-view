@@ -5,12 +5,73 @@ import { expect } from 'chai'
 import { JSDOM } from 'jsdom'
 
 import Index from './../../../src/js/index'
+import dispatcher from './../../../src/js/helpers/dispatcher'
 
 const { window } = new JSDOM()
 global.window = window
 global.document = window.document
 
 describe('<Index />', function () {
+  for (const action of ['VARIABLE_UPDATED', 'VARIABLE_ADDED', 'VARIABLE_REMOVED']) {
+    it(`does not include a rejected ${action} in a later accepted edit`, function () {
+      const src = { locked: 1, editable: 2 }
+      const onEdit = sinon.spy(change => change.name === 'editable')
+      const wrapper = mount(
+        <Index src={src} onEdit={onEdit} onAdd={() => false} onDelete={() => false} />
+      )
+      try {
+        const rjvId = wrapper.instance().rjvId
+        dispatcher.dispatch({
+          name: action,
+          rjvId,
+          data: {
+            name: action === 'VARIABLE_ADDED' ? 'added' : 'locked',
+            namespace: ['root'],
+            new_value: 3,
+            existing_value: action === 'VARIABLE_ADDED' ? undefined : 1,
+            variable_removed: action === 'VARIABLE_REMOVED'
+          }
+        })
+        expect(wrapper.state('src')).to.deep.equal(src)
+        dispatcher.dispatch({
+          name: 'VARIABLE_UPDATED',
+          rjvId,
+          data: {
+            name: 'editable',
+            namespace: ['root'],
+            new_value: 4,
+            existing_value: 2
+          }
+        })
+        expect(onEdit.lastCall.args[0].updated_src).to.deep.equal({ locked: 1, editable: 4 })
+        expect(wrapper.state('src')).to.deep.equal({ locked: 1, editable: 4 })
+        expect(src).to.deep.equal({ locked: 1, editable: 2 })
+      } finally {
+        wrapper.unmount()
+      }
+    })
+  }
+
+  it('keeps the nested path when a type-changing edit is rejected twice', function () {
+    const src = { branch: { locked: 1 } }
+    const onEdit = sinon.spy(() => false)
+    const wrapper = mount(<Index src={src} onEdit={onEdit} />)
+    try {
+      for (let attempt = 0; attempt < 2; attempt++) {
+        wrapper.find('.click-to-edit-icon').hostNodes().simulate('click')
+        wrapper.find('textarea').simulate('change', { target: { value: 'undefined' } })
+        wrapper.find('.edit-check.detected').hostNodes().simulate('click')
+        expect(onEdit.lastCall.args[0].namespace).to.deep.equal(['branch'])
+        expect(onEdit.lastCall.args[0].updated_src).to.deep.equal({ branch: { locked: undefined } })
+        expect(wrapper.state('src')).to.deep.equal(src)
+      }
+      expect(onEdit.callCount).to.equal(2)
+      expect(src).to.deep.equal({ branch: { locked: 1 } })
+    } finally {
+      wrapper.unmount()
+    }
+  })
+
   it('check data type labels from index', function () {
     const wrapper = render(
       <Index
