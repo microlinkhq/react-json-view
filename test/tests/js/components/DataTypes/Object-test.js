@@ -1,4 +1,5 @@
 import React from 'react'
+import { unstable_batchedUpdates as batchedUpdates } from 'react-dom'
 import { shallow, render, mount } from 'enzyme'
 import { expect } from 'chai'
 
@@ -6,6 +7,103 @@ import JsonObject from './../../../../../src/js/components/DataTypes/Object'
 
 describe('<JsonObject />', function () {
   const rjvId = 1
+
+  for (const src of [{ branch: { leaf: true } }, { branch: [true] }]) {
+    const type = Array.isArray(src.branch) ? 'array' : 'object'
+    it(`preserves ${type} collapse during parent hover`, function () {
+      const wrapper = mount(
+        <JsonObject
+          src={src}
+          namespace={['root']}
+          rjvId={`batched-hover-${type}`}
+          theme='rjv-default'
+          indentWidth={1}
+          depth={0}
+          collapsed={false}
+        />
+      )
+      try {
+        const branch = () => wrapper.find(JsonObject).filter({ name: 'branch' })
+        expect(branch().find('.object-content')).to.have.length(1)
+
+        batchedUpdates(() => {
+          wrapper.find('.object-key-val').first().simulate('mouseEnter')
+          branch().find('.icon-container').first().simulate('click')
+        })
+        wrapper.update()
+
+        expect(branch().find('.object-content')).to.have.length(0)
+        expect(branch().find('.collapsed-icon').hostNodes()).to.have.length(1)
+        branch().find('.icon-container').first().simulate('click')
+        expect(branch().find('.object-content')).to.have.length(1)
+      } finally {
+        wrapper.unmount()
+      }
+    })
+  }
+
+  for (const namespace of [['other', 'branch'], ['root', 'nested', 'branch']]) {
+    it(`restores cached state for ${namespace.join('.')}`, function () {
+      const src = { leaf: true }
+      const wrapper = mount(
+        <JsonObject
+          src={src}
+          namespace={['root', 'branch']}
+          name='branch'
+          rjvId={`namespace-change-${namespace.join('.')}`}
+          theme='rjv-default'
+          indentWidth={1}
+          depth={1}
+          collapsed={false}
+        />
+      )
+      try {
+        wrapper.find('.icon-container').first().simulate('click')
+        expect(wrapper.find('.object-content')).to.have.length(0)
+
+        wrapper.setProps({ namespace: ['root', 'branch'], src: { ...src } })
+        expect(wrapper.find('.object-content')).to.have.length(0)
+
+        wrapper.setProps({ namespace })
+        expect(wrapper.find('.object-content')).to.have.length(1)
+
+        wrapper.setProps({ namespace: ['root', 'branch'] })
+        expect(wrapper.find('.object-content')).to.have.length(0)
+      } finally {
+        wrapper.unmount()
+      }
+    })
+  }
+
+  it('updates the collapse rule for the same path', function () {
+    const wrapper = mount(
+      <JsonObject
+        src={{ leaf: true }}
+        namespace={['collapse-rule']}
+        rjvId='collapse-rule-update'
+        theme='rjv-default'
+        indentWidth={1}
+        depth={0}
+        collapsed={false}
+        shouldCollapse={false}
+      />
+    )
+    try {
+      expect(wrapper.find('.object-content')).to.have.length(1)
+      wrapper.setProps({
+        namespace: ['collapse-rule'],
+        shouldCollapse: () => true
+      })
+      expect(wrapper.find('.object-content')).to.have.length(0)
+      wrapper.setProps({
+        namespace: ['collapse-rule'],
+        shouldCollapse: () => false
+      })
+      expect(wrapper.find('.object-content')).to.have.length(1)
+    } finally {
+      wrapper.unmount()
+    }
+  })
 
   it('Object component should have a data type label', function () {
     const src = {
