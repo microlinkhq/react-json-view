@@ -67,11 +67,18 @@ class RjvObject extends React.PureComponent {
 
   static getDerivedStateFromProps (nextProps, prevState) {
     const { prevProps } = prevState
+    // Parent renders create new arrays for the same path. Preserve pending toggles.
+    const namespaceChanged =
+      nextProps.namespace !== prevProps.namespace &&
+      (!prevProps.namespace ||
+        nextProps.namespace.length !== prevProps.namespace.length ||
+        nextProps.namespace.some((name, i) => name !== prevProps.namespace[i]))
     if (
       nextProps.src !== prevProps.src ||
       nextProps.collapsed !== prevProps.collapsed ||
+      nextProps.shouldCollapse !== prevProps.shouldCollapse ||
       nextProps.name !== prevProps.name ||
-      nextProps.namespace !== prevProps.namespace ||
+      namespaceChanged ||
       nextProps.rjvId !== prevProps.rjvId
     ) {
       const newState = RjvObject.getState(nextProps)
