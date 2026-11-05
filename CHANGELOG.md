@@ -1,3 +1,9 @@
+## 1.31.47 (2026-11-05)
+
+### Bug Fixes
+
+* preserve pending collapse on parent hover ([#220](https://github.com/microlinkhq/react-json-view/issues/220)) ([2068895](https://github.com/microlinkhq/react-json-view/commit/2068895f780055efb29e7c9a04310ff1fce547ac))
+
 ## 1.31.46 (2026-11-02)
 
 ## 1.31.45 (2026-11-02)
