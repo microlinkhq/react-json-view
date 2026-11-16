@@ -293,7 +293,7 @@
     "@babel/eslint-parser": "~8.0.5",
     "@babel/preset-env": "~8.0.5",
     "@babel/preset-react": "~8.0.1",
-    "@babel/register": "~8.0.5",
+    "@babel/register": "~8.1.2",
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "latest",
     "babel-loader": "10.1.1",
