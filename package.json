@@ -290,7 +290,7 @@
   },
   "devDependencies": {
     "@babel/core": "~8.1.0",
-    "@babel/eslint-parser": "~8.0.5",
+    "@babel/eslint-parser": "~8.1.2",
     "@babel/preset-env": "~8.0.5",
     "@babel/preset-react": "~8.0.1",
     "@babel/register": "~8.0.5",
